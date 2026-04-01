@@ -6,22 +6,22 @@
 
 ## Size Snapshot
 - rows before cleaning: 10000
-- rows after cleaning: 5177
-- columns: 16
+- rows after cleaning: 5150
+- columns: 13
 
 ## Cleaning Actions
-- exact duplicate rows removed: 4823
+- exact duplicate rows removed: 4850
 - rows removed due to missing core fields (`user_id`, `movie_id`, `rating`): 0
 
 ## Missing Data (Top Fields)
-- `cast_names`: 3.79%
-- `genres`: 0.79%
+- `cast`: 3.81%
+- `genres`: 0.80%
 
 ## Rating Balance Check
-- negative: 772
-- neutral: 1863
-- positive: 2542
-- min/max class ratio: 0.304
+- negative: 765
+- neutral: 1856
+- positive: 2529
+- min/max class ratio: 0.302
 - verdict: **imbalanced**
 
 ## Visualizations

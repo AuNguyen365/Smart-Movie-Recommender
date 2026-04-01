@@ -18,6 +18,7 @@ OUTPUT_DIR = ROOT_DIR / "outputs"
 FIGURES_DIR = OUTPUT_DIR / "figures"
 REPORTS_DIR = OUTPUT_DIR / "reports"
 CLEANED_DIR = DATA_DIR / "cleaned"
+COMPARISON_DIR = FIGURES_DIR / "comparison"
 
 
 @dataclass(frozen=True)
@@ -33,6 +34,23 @@ class CleaningStats:
     rows_after: int
     dropped_exact_duplicates: int
     dropped_missing_core_fields: int
+
+
+COMMON_SCHEMA_COLUMNS = [
+    "user_id",
+    "movie_id",
+    "movie_title",
+    "rating",
+    "genres",
+    "cast",
+    "release_year",
+    "language",
+    "timestamp",
+    "release_year_clean",
+    "genres_list",
+    "primary_genre",
+    "genre_count",
+]
 
 
 def parse_genres(value: Any) -> list[str]:
@@ -121,9 +139,30 @@ def standardize_columns(df: pd.DataFrame) -> pd.DataFrame:
     return normalized
 
 
+def harmonize_schema(df: pd.DataFrame) -> pd.DataFrame:
+    harmonized = df.copy()
+
+    # Align semantic-equivalent column names across sources.
+    rename_map = {
+        "cast_names": "cast",
+    }
+    source_renames = {k: v for k, v in rename_map.items() if k in harmonized.columns}
+    if source_renames:
+        harmonized = harmonized.rename(columns=source_renames)
+
+    # Keep only the shared schema and create missing fields as NA.
+    for col in COMMON_SCHEMA_COLUMNS:
+        if col not in harmonized.columns:
+            harmonized[col] = pd.NA
+
+    harmonized = harmonized[COMMON_SCHEMA_COLUMNS].copy()
+    return harmonized
+
+
 def clean_dataset(df: pd.DataFrame) -> tuple[pd.DataFrame, CleaningStats]:
     cleaned = normalize_text_columns(df.copy())
     cleaned = standardize_columns(cleaned)
+    cleaned = harmonize_schema(cleaned)
 
     rows_before = len(cleaned)
     dedupe_view = cleaned.copy()
@@ -284,6 +323,180 @@ def create_visualizations(df: pd.DataFrame, dataset_key: str) -> list[Path]:
     return outputs
 
 
+def _plot_comparison_rating_distribution(
+    datasets: dict[str, pd.DataFrame], out_dir: Path
+) -> Path:
+    rating_indexes: set[float] = set()
+    counts_by_dataset: dict[str, pd.Series] = {}
+
+    for name, df in datasets.items():
+        if "rating" not in df.columns:
+            counts_by_dataset[name] = pd.Series(dtype=int)
+            continue
+        counts = df["rating"].dropna().value_counts().sort_index()
+        counts_by_dataset[name] = counts
+        rating_indexes.update(counts.index.tolist())
+
+    plt.figure(figsize=(12, 6))
+    if not rating_indexes:
+        plt.text(0.5, 0.5, "No rating data available", ha="center", va="center")
+        plt.axis("off")
+    else:
+        x = np.array(sorted(rating_indexes), dtype=float)
+        labels = [str(int(v)) if float(v).is_integer() else str(v) for v in x]
+        width = 0.35
+        offsets = np.linspace(-(len(datasets) - 1) * width / 2, (len(datasets) - 1) * width / 2, len(datasets))
+
+        for (offset, (name, counts)) in zip(offsets, counts_by_dataset.items()):
+            y = [int(counts.get(v, 0)) for v in x]
+            plt.bar(np.arange(len(x)) + offset, y, width=width, label=name)
+
+        plt.xticks(np.arange(len(x)), labels)
+        plt.title("Rating Distribution Comparison")
+        plt.xlabel("Rating")
+        plt.ylabel("Count")
+        plt.legend()
+    plt.tight_layout()
+
+    path = out_dir / "rating_distribution_comparison.png"
+    plt.savefig(path, dpi=140)
+    plt.close()
+    return path
+
+
+def _plot_comparison_language_distribution(
+    datasets: dict[str, pd.DataFrame], out_dir: Path
+) -> Path:
+    lang_counts_by_dataset: dict[str, pd.Series] = {}
+    all_languages: pd.Series = pd.Series(dtype=int)
+
+    for name, df in datasets.items():
+        if "language" not in df.columns:
+            lang_counts_by_dataset[name] = pd.Series(dtype=int)
+            continue
+        counts = df["language"].fillna("unknown").value_counts()
+        lang_counts_by_dataset[name] = counts
+        all_languages = all_languages.add(counts, fill_value=0)
+
+    top_languages = all_languages.sort_values(ascending=False).head(10).index.tolist()
+
+    plt.figure(figsize=(12, 6))
+    if not top_languages:
+        plt.text(0.5, 0.5, "No language data available", ha="center", va="center")
+        plt.axis("off")
+    else:
+        x = np.arange(len(top_languages))
+        width = 0.35
+        offsets = np.linspace(-(len(datasets) - 1) * width / 2, (len(datasets) - 1) * width / 2, len(datasets))
+
+        for (offset, (name, counts)) in zip(offsets, lang_counts_by_dataset.items()):
+            y = [int(counts.get(lang, 0)) for lang in top_languages]
+            plt.bar(x + offset, y, width=width, label=name)
+
+        plt.xticks(x, top_languages, rotation=0)
+        plt.title("Top Languages Comparison")
+        plt.xlabel("Language")
+        plt.ylabel("Count")
+        plt.legend()
+    plt.tight_layout()
+
+    path = out_dir / "language_distribution_comparison.png"
+    plt.savefig(path, dpi=140)
+    plt.close()
+    return path
+
+
+def _plot_comparison_release_year_distribution(
+    datasets: dict[str, pd.DataFrame], out_dir: Path
+) -> Path:
+    year_counts_by_dataset: dict[str, pd.Series] = {}
+    year_index: set[int] = set()
+
+    for name, df in datasets.items():
+        if "release_year_clean" not in df.columns:
+            year_counts_by_dataset[name] = pd.Series(dtype=int)
+            continue
+        counts = (
+            df["release_year_clean"].dropna().astype(int).value_counts().sort_index()
+        )
+        year_counts_by_dataset[name] = counts
+        year_index.update(counts.index.tolist())
+
+    plt.figure(figsize=(12, 6))
+    if not year_index:
+        plt.text(0.5, 0.5, "No release year data available", ha="center", va="center")
+        plt.axis("off")
+    else:
+        years = sorted(year_index)
+        # Keep plot readable by focusing on the latest 20 years present.
+        years = years[-20:]
+        for name, counts in year_counts_by_dataset.items():
+            y = [int(counts.get(year, 0)) for year in years]
+            plt.plot(years, y, marker="o", label=name)
+
+        plt.title("Release Year Distribution Comparison (latest 20 years)")
+        plt.xlabel("Year")
+        plt.ylabel("Count")
+        plt.xticks(years, rotation=45, ha="right")
+        plt.legend()
+    plt.tight_layout()
+
+    path = out_dir / "release_year_distribution_comparison.png"
+    plt.savefig(path, dpi=140)
+    plt.close()
+    return path
+
+
+def _plot_comparison_missing_values(
+    datasets: dict[str, pd.DataFrame], out_dir: Path
+) -> Path:
+    missing_pct_by_dataset: dict[str, pd.Series] = {}
+    missing_union = pd.Series(dtype=float)
+
+    for name, df in datasets.items():
+        missing_pct = (df.isna().mean() * 100).sort_values(ascending=False)
+        missing_pct_by_dataset[name] = missing_pct
+        missing_union = missing_union.add(missing_pct, fill_value=0)
+
+    top_fields = missing_union.sort_values(ascending=False)
+    top_fields = top_fields[top_fields > 0].head(10).index.tolist()
+
+    plt.figure(figsize=(12, 6))
+    if not top_fields:
+        plt.text(0.5, 0.5, "No missing values", ha="center", va="center")
+        plt.axis("off")
+    else:
+        x = np.arange(len(top_fields))
+        width = 0.35
+        offsets = np.linspace(-(len(datasets) - 1) * width / 2, (len(datasets) - 1) * width / 2, len(datasets))
+
+        for (offset, (name, missing_pct)) in zip(offsets, missing_pct_by_dataset.items()):
+            y = [float(missing_pct.get(field, 0.0)) for field in top_fields]
+            plt.bar(x + offset, y, width=width, label=name)
+
+        plt.xticks(x, top_fields, rotation=45, ha="right")
+        plt.title("Top Missing Fields Comparison")
+        plt.ylabel("Missing (%)")
+        plt.legend()
+    plt.tight_layout()
+
+    path = out_dir / "missing_values_comparison.png"
+    plt.savefig(path, dpi=140)
+    plt.close()
+    return path
+
+
+def create_comparison_visualizations(datasets: dict[str, pd.DataFrame]) -> list[Path]:
+    COMPARISON_DIR.mkdir(parents=True, exist_ok=True)
+
+    return [
+        _plot_comparison_missing_values(datasets, COMPARISON_DIR),
+        _plot_comparison_rating_distribution(datasets, COMPARISON_DIR),
+        _plot_comparison_language_distribution(datasets, COMPARISON_DIR),
+        _plot_comparison_release_year_distribution(datasets, COMPARISON_DIR),
+    ]
+
+
 def rating_balance_summary(df: pd.DataFrame) -> tuple[pd.Series, float, str]:
     if "rating" not in df.columns:
         return pd.Series(dtype=int), float("nan"), "cannot-evaluate"
@@ -397,7 +610,7 @@ def build_report(
     return report
 
 
-def run_for_dataset(spec: DatasetSpec) -> Path:
+def run_for_dataset(spec: DatasetSpec) -> tuple[Path, pd.DataFrame]:
     df = pd.read_csv(spec.source_path)
     cleaned_df, stats = clean_dataset(df)
 
@@ -417,7 +630,7 @@ def run_for_dataset(spec: DatasetSpec) -> Path:
         figure_paths=figure_paths,
     )
     report_path.write_text(report, encoding="utf-8")
-    return report_path
+    return report_path, cleaned_df
 
 
 def main() -> None:
@@ -435,12 +648,20 @@ def main() -> None:
     ]
 
     generated_reports: list[Path] = []
+    cleaned_by_key: dict[str, pd.DataFrame] = {}
     for spec in datasets:
-        generated_reports.append(run_for_dataset(spec))
+        report_path, cleaned_df = run_for_dataset(spec)
+        generated_reports.append(report_path)
+        cleaned_by_key[spec.key] = cleaned_df
+
+    comparison_paths = create_comparison_visualizations(cleaned_by_key)
 
     print("Generated reports:")
     for report_path in generated_reports:
         print(f"- {report_path.relative_to(ROOT_DIR).as_posix()}")
+    print("Generated comparison figures:")
+    for figure_path in comparison_paths:
+        print(f"- {figure_path.relative_to(ROOT_DIR).as_posix()}")
 
 
 if __name__ == "__main__":
