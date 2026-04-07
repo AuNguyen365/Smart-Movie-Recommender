@@ -190,6 +190,11 @@ def clean_dataset(df: pd.DataFrame) -> tuple[pd.DataFrame, CleaningStats]:
         after_core = deduped.copy()
     dropped_missing_core_fields = len(deduped) - len(after_core)
 
+    if "language" in after_core.columns:
+        after_core = after_core[
+            after_core["language"].astype(str).str.lower().eq("en")
+        ].copy()
+
     stats = CleaningStats(
         rows_before=rows_before,
         rows_after=len(after_core),

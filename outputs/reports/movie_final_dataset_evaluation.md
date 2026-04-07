@@ -6,7 +6,7 @@
 
 ## Size Snapshot
 - rows before cleaning: 10000
-- rows after cleaning: 5845
+- rows after cleaning: 5431
 - columns: 13
 
 ## Cleaning Actions
@@ -14,13 +14,13 @@
 - rows removed due to missing core fields (`user_id`, `movie_id`, `rating`): 0
 
 ## Missing Data (Top Fields)
-- `cast`: 0.10%
+- no missing values detected
 
 ## Rating Balance Check
-- negative: 423
-- neutral: 1641
-- positive: 3781
-- min/max class ratio: 0.112
+- negative: 401
+- neutral: 1562
+- positive: 3468
+- min/max class ratio: 0.116
 - verdict: **imbalanced**
 
 ## Visualizations
