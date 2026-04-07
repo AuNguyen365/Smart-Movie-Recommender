@@ -3,6 +3,7 @@ from __future__ import annotations
 import ast
 import json
 import os
+import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -92,9 +93,9 @@ def parse_genres(value: Any) -> list[str]:
         except Exception:
             pass
 
-    # Fallback for comma-separated format.
+    # Fallback for plain text genres (e.g. Action|Thriller or Action, Thriller).
     text = raw_text.strip("[]")
-    parts = [part.strip().strip("\"'") for part in text.split(",")]
+    parts = [part.strip().strip("\"'") for part in re.split(r"[,|;/]", text)]
     return [part.lower() for part in parts if part]
 
 
@@ -615,9 +616,24 @@ def build_report(
     return report
 
 
+def adjust_half_step_ratings(df: pd.DataFrame) -> pd.DataFrame:
+    adjusted = df.copy()
+    if "rating" not in adjusted.columns:
+        return adjusted
+
+    rating = pd.to_numeric(adjusted["rating"], errors="coerce")
+    fractional = rating - np.floor(rating)
+    half_step_mask = np.isclose(fractional, 0.5)
+    adjusted.loc[half_step_mask, "rating"] = rating.loc[half_step_mask] + 0.5
+    return adjusted
+
+
 def run_for_dataset(spec: DatasetSpec) -> tuple[Path, pd.DataFrame]:
     df = pd.read_csv(spec.source_path)
     cleaned_df, stats = clean_dataset(df)
+
+    if spec.key == "movie_final_dataset":
+        cleaned_df = adjust_half_step_ratings(cleaned_df)
 
     CLEANED_DIR.mkdir(parents=True, exist_ok=True)
     cleaned_df.to_csv(spec.cleaned_path, index=False)
