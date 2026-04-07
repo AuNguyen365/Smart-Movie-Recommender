@@ -6,7 +6,7 @@
 
 ## Size Snapshot
 - rows before cleaning: 10000
-- rows after cleaning: 5150
+- rows after cleaning: 3751
 - columns: 13
 
 ## Cleaning Actions
@@ -14,15 +14,15 @@
 - rows removed due to missing core fields (`user_id`, `movie_id`, `rating`): 0
 
 ## Missing Data (Top Fields)
-- `cast`: 3.81%
-- `genres`: 0.80%
+- `cast`: 3.04%
+- `genres`: 1.01%
 
 ## Rating Balance Check
-- negative: 765
-- neutral: 1856
-- positive: 2529
-- min/max class ratio: 0.302
-- verdict: **imbalanced**
+- negative: 627
+- neutral: 1421
+- positive: 1703
+- min/max class ratio: 0.368
+- verdict: **moderately-imbalanced**
 
 ## Visualizations
 - ![](../figures/trakt_ultimate_checkpoint/missing_values.png)
@@ -32,4 +32,4 @@
 - ![](../figures/trakt_ultimate_checkpoint/release_year_distribution.png)
 
 ## Recommendation
-Dataset is imbalanced for rating-class tasks; apply resampling or class-weighted training if you build a classifier.
+Dataset is usable, but classification tasks should consider class weights or targeted resampling.
