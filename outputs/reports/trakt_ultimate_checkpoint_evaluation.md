@@ -5,8 +5,8 @@
 - cleaned file: `data/cleaned/trakt_ultimate_checkpoint_cleaned.csv`
 
 ## Size Snapshot
-- rows before cleaning: 10000
-- rows after cleaning: 3751
+- rows before cleaning: 11500
+- rows after cleaning: 5251
 - columns: 13
 
 ## Cleaning Actions
@@ -14,14 +14,14 @@
 - rows removed due to missing core fields (`user_id`, `movie_id`, `rating`): 0
 
 ## Missing Data (Top Fields)
-- `cast`: 3.04%
-- `genres`: 1.01%
+- `cast`: 2.17%
+- `genres`: 0.72%
 
 ## Rating Balance Check
-- negative: 627
-- neutral: 1421
-- positive: 1703
-- min/max class ratio: 0.368
+- negative: 1157
+- neutral: 2012
+- positive: 2082
+- min/max class ratio: 0.556
 - verdict: **moderately-imbalanced**
 
 ## Visualizations

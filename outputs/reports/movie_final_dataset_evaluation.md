@@ -18,9 +18,9 @@
 
 ## Rating Balance Check
 - negative: 401
-- neutral: 1562
-- positive: 3468
-- min/max class ratio: 0.116
+- neutral: 1553
+- positive: 3477
+- min/max class ratio: 0.115
 - verdict: **imbalanced**
 
 ## Visualizations
