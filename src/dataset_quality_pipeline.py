@@ -635,9 +635,6 @@ def run_for_dataset(spec: DatasetSpec) -> tuple[Path, pd.DataFrame]:
     if spec.key == "movie_final_dataset":
         cleaned_df = adjust_half_step_ratings(cleaned_df)
 
-    if spec.key == "movie_final_dataset":
-        cleaned_df = adjust_half_step_ratings(cleaned_df)
-
     CLEANED_DIR.mkdir(parents=True, exist_ok=True)
     cleaned_df.to_csv(spec.cleaned_path, index=False)
 
