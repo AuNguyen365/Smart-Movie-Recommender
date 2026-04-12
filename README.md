@@ -131,7 +131,7 @@ Kết quả kỳ vọng:
 Khi các file trong thư mục src đã có code đầy đủ, chạy pipeline mẫu:
 
 ```bash
-python src/preprocessing.py
+python src/pipeline/preprocessing/encoding.py
 python src/clustering.py
 python src/association.py
 python src/recommend.py

@@ -10,7 +10,7 @@ import scipy.sparse as sp
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler, MultiLabelBinarizer
 
-ROOT_DIR = Path(__file__).resolve().parents[1]
+ROOT_DIR = Path(__file__).resolve().parents[3]
 DATA_DIR = ROOT_DIR / "data"
 CLEANED_DIR = DATA_DIR / "cleaned"
 OUTPUT_DIR = ROOT_DIR / "outputs"
