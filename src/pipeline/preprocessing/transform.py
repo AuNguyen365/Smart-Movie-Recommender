@@ -155,6 +155,7 @@ def transform_integrated_dataset(path: Path) -> pd.DataFrame:
         df["genre_count"] = genres_list.apply(len)
 
     df = _consolidate_fields(df)
+    df = df.drop(columns=["timestamp"], errors="ignore")
 
     df.to_csv(path, index=False)
     return df
@@ -173,7 +174,7 @@ def main() -> None:
     empty_genres = int((df["genres"].astype(str).str.strip() == "").sum()) if "genres" in df.columns else -1
 
     print("rows", len(df))
-    print("timestamp_sample", df["timestamp"].head(3).tolist())
+    print("timestamp_removed", "timestamp" not in df.columns)
     print("missing_pct_cast_genres", missing_pct)
     print("empty_cast", empty_cast)
     print("empty_genres", empty_genres)
