@@ -49,7 +49,7 @@ def _canonicalize_genre_name(name: str) -> str:
 
 def parse_genres(value: Any) -> list[str]:
     if isinstance(value, (list, tuple, set)):
-        names: list[str] = []
+        names = []
         for item in value:
             if isinstance(item, dict) and item.get("name"):
                 names.append(_canonicalize_genre_name(str(item["name"])))
@@ -69,12 +69,11 @@ def parse_genres(value: Any) -> list[str]:
     if not raw_text:
         return []
 
-    # First try JSON format: [{"id": ..., "name": "Crime"}, ...]
     for parser in (json.loads, ast.literal_eval):
         try:
             parsed = parser(raw_text)
             if isinstance(parsed, list):
-                names: list[str] = []
+                names = []
                 for item in parsed:
                     if isinstance(item, dict) and item.get("name"):
                         names.append(_canonicalize_genre_name(str(item["name"])))
@@ -86,7 +85,6 @@ def parse_genres(value: Any) -> list[str]:
         except Exception:
             pass
 
-    # Fallback for plain text genres (e.g. Action|Thriller or Action, Thriller).
     text = raw_text.strip("[]")
     parts = [part.strip().strip("\"'") for part in re.split(r"[,|;/]", text)]
     return [_canonicalize_genre_name(part) for part in parts if part]
@@ -126,7 +124,7 @@ def standardize_columns(df: pd.DataFrame) -> pd.DataFrame:
     if "genres" in normalized.columns:
         normalized["genres_list"] = normalized["genres"].apply(parse_genres)
         normalized["primary_genre"] = normalized["genres_list"].apply(
-            lambda x: x[0] if x else "unknown"
+            lambda x: x[0] if x else None   # ❌ không dùng "unknown"
         )
         normalized["genre_count"] = normalized["genres_list"].apply(len)
 
@@ -136,7 +134,6 @@ def standardize_columns(df: pd.DataFrame) -> pd.DataFrame:
 def harmonize_schema(df: pd.DataFrame) -> pd.DataFrame:
     harmonized = df.copy()
 
-    # Align semantic-equivalent column names across sources.
     rename_map = {
         "cast_names": "cast",
     }
@@ -144,7 +141,6 @@ def harmonize_schema(df: pd.DataFrame) -> pd.DataFrame:
     if source_renames:
         harmonized = harmonized.rename(columns=source_renames)
 
-    # Keep only the shared schema and create missing fields as NA.
     for col in COMMON_SCHEMA_COLUMNS:
         if col not in harmonized.columns:
             harmonized[col] = pd.NA
@@ -159,6 +155,8 @@ def clean_dataset(df: pd.DataFrame) -> tuple[pd.DataFrame, CleaningStats]:
     cleaned = harmonize_schema(cleaned)
 
     rows_before = len(cleaned)
+
+    # ===== REMOVE DUPLICATES =====
     dedupe_view = cleaned.copy()
     for col in dedupe_view.columns:
         has_nested = dedupe_view[col].map(
@@ -177,13 +175,17 @@ def clean_dataset(df: pd.DataFrame) -> tuple[pd.DataFrame, CleaningStats]:
     deduped = cleaned.loc[~dedupe_mask].copy()
     dropped_exact_duplicates = rows_before - len(deduped)
 
-    core_cols = [c for c in ["user_id", "movie_id", "rating"] if c in deduped.columns]
-    if core_cols:
-        after_core = deduped.dropna(subset=core_cols).copy()
-    else:
-        after_core = deduped.copy()
-    dropped_missing_core_fields = len(deduped) - len(after_core)
+    # ===== DROP ALL MISSING IMPORTANT FIELDS =====
+    required_cols = ["user_id", "movie_id", "rating", "genres", "cast"]
+    required_cols = [c for c in required_cols if c in deduped.columns]
 
+    after_core = deduped.dropna(subset=required_cols).copy()
+
+    # ===== REMOVE EMPTY GENRES [] =====
+    if "genres_list" in after_core.columns:
+        after_core = after_core[after_core["genres_list"].map(len) > 0]
+
+    # ===== FILTER LANGUAGE =====
     if "language" in after_core.columns:
         after_core = after_core[
             after_core["language"].astype(str).str.lower().eq("en")
@@ -193,8 +195,9 @@ def clean_dataset(df: pd.DataFrame) -> tuple[pd.DataFrame, CleaningStats]:
         rows_before=rows_before,
         rows_after=len(after_core),
         dropped_exact_duplicates=dropped_exact_duplicates,
-        dropped_missing_core_fields=dropped_missing_core_fields,
+        dropped_missing_core_fields = len(deduped) - len(after_core),
     )
+
     return after_core, stats
 
 
