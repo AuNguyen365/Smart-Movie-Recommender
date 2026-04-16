@@ -10,18 +10,12 @@ ROOT_DIR = Path(__file__).resolve().parents[3]
 DATA_DIR = ROOT_DIR / "data"
 CLEANED_DIR = DATA_DIR / "cleaned"
 
-def _normalize_genre_name(value):
-    text = str(value).strip().lower()
-    text = re.sub(r"[\s\-]+", "_", text)
-    text = re.sub(r"_+", "_", text)
-    return text.strip("_")
-
 
 def parse_genres(value):
     if pd.isna(value):
         return []
     if isinstance(value, (list, tuple, set)):
-        return [_normalize_genre_name(x) for x in value if str(x).strip()]
+        return [str(x).strip().lower() for x in value if str(x).strip()]
 
     raw = str(value).strip()
     if not raw:
@@ -34,9 +28,9 @@ def parse_genres(value):
                 out = []
                 for item in parsed:
                     if isinstance(item, dict) and item.get('name'):
-                        out.append(_normalize_genre_name(item['name']))
+                        out.append(str(item['name']).strip().lower())
                     elif isinstance(item, str):
-                        txt = _normalize_genre_name(item)
+                        txt = item.strip().lower()
                         if txt:
                             out.append(txt)
                 if out:
@@ -46,7 +40,7 @@ def parse_genres(value):
 
     text = raw.strip('[]')
     parts = [p.strip().strip('"\'') for p in re.split(r'[,|;/]', text)]
-    return [_normalize_genre_name(p) for p in parts if p]
+    return [p.lower() for p in parts if p]
 
 
 def _drop_identical_columns(df: pd.DataFrame) -> pd.DataFrame:
