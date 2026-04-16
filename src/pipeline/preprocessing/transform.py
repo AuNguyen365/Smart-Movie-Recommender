@@ -11,11 +11,23 @@ DATA_DIR = ROOT_DIR / "data"
 CLEANED_DIR = DATA_DIR / "cleaned"
 
 
+def _canonicalize_genre_name(name: str) -> str:
+    normalized = name.strip().lower().replace("_", " ").replace("-", " ")
+    normalized = re.sub(r"\s+", " ", normalized)
+
+    alias_map = {
+        "sci fi": "science fiction",
+        "sci fi fantasy": "science fiction",
+        "science fiction": "science fiction",
+    }
+    return alias_map.get(normalized, normalized)
+
+
 def parse_genres(value):
     if pd.isna(value):
         return []
     if isinstance(value, (list, tuple, set)):
-        return [str(x).strip().lower() for x in value if str(x).strip()]
+        return [_canonicalize_genre_name(str(x)) for x in value if str(x).strip()]
 
     raw = str(value).strip()
     if not raw:
@@ -28,9 +40,9 @@ def parse_genres(value):
                 out = []
                 for item in parsed:
                     if isinstance(item, dict) and item.get('name'):
-                        out.append(str(item['name']).strip().lower())
+                        out.append(_canonicalize_genre_name(str(item['name'])))
                     elif isinstance(item, str):
-                        txt = item.strip().lower()
+                        txt = _canonicalize_genre_name(item)
                         if txt:
                             out.append(txt)
                 if out:
@@ -40,7 +52,7 @@ def parse_genres(value):
 
     text = raw.strip('[]')
     parts = [p.strip().strip('"\'') for p in re.split(r'[,|;/]', text)]
-    return [p.lower() for p in parts if p]
+    return [_canonicalize_genre_name(p) for p in parts if p]
 
 
 def _drop_identical_columns(df: pd.DataFrame) -> pd.DataFrame:
