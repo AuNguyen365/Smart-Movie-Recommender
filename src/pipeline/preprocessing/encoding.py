@@ -17,6 +17,18 @@ OUTPUT_DIR = ROOT_DIR / "outputs"
 ENCODERS_DIR = OUTPUT_DIR / "encoders"
 
 
+def _canonicalize_genre_name(name: str) -> str:
+    normalized = name.strip().lower().replace("_", " ").replace("-", " ")
+    normalized = " ".join(normalized.split())
+
+    alias_map = {
+        "sci fi": "science fiction",
+        "sci fi fantasy": "science fiction",
+        "science fiction": "science fiction",
+    }
+    return alias_map.get(normalized, normalized)
+
+
 def load_data() -> pd.DataFrame:
     input_path = CLEANED_DIR / "integrated_dataset_cleaned.csv"
     print(f"Loading data from {input_path}...")
@@ -27,6 +39,9 @@ def preprocess_features(df: pd.DataFrame) -> tuple[pd.DataFrame, sp.csr_matrix]:
     print("Step 1: Parse genres and cast...")
     df["genres_list_parsed"] = df["genres_list"].apply(
         lambda x: json.loads(x) if pd.notna(x) else []
+    )
+    df["genres_list_parsed"] = df["genres_list_parsed"].apply(
+        lambda arr: [_canonicalize_genre_name(str(g)) for g in arr if str(g).strip()]
     )
     df["cast"] = df["cast"].fillna("unknown")
 

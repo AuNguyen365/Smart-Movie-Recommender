@@ -35,19 +35,31 @@ COMMON_SCHEMA_COLUMNS = [
 ]
 
 
+def _canonicalize_genre_name(name: str) -> str:
+    normalized = name.strip().lower().replace("_", " ").replace("-", " ")
+    normalized = re.sub(r"\s+", " ", normalized)
+
+    alias_map = {
+        "sci fi": "science fiction",
+        "sci fi fantasy": "science fiction",
+        "science fiction": "science fiction",
+    }
+    return alias_map.get(normalized, normalized)
+
+
 def parse_genres(value: Any) -> list[str]:
     if isinstance(value, (list, tuple, set)):
         names: list[str] = []
         for item in value:
             if isinstance(item, dict) and item.get("name"):
-                names.append(str(item["name"]).strip().lower())
+                names.append(_canonicalize_genre_name(str(item["name"])))
             elif isinstance(item, str):
-                names.append(item.strip().lower())
+                names.append(_canonicalize_genre_name(item))
         return [x for x in names if x]
 
     if isinstance(value, dict):
         if value.get("name"):
-            return [str(value["name"]).strip().lower()]
+            return [_canonicalize_genre_name(str(value["name"]))]
         return []
 
     if pd.isna(value):
@@ -65,9 +77,9 @@ def parse_genres(value: Any) -> list[str]:
                 names: list[str] = []
                 for item in parsed:
                     if isinstance(item, dict) and item.get("name"):
-                        names.append(str(item["name"]).strip().lower())
+                        names.append(_canonicalize_genre_name(str(item["name"])))
                     elif isinstance(item, str):
-                        names.append(item.strip().lower())
+                        names.append(_canonicalize_genre_name(item))
                 names = [x for x in names if x]
                 if names:
                     return names
@@ -77,7 +89,7 @@ def parse_genres(value: Any) -> list[str]:
     # Fallback for plain text genres (e.g. Action|Thriller or Action, Thriller).
     text = raw_text.strip("[]")
     parts = [part.strip().strip("\"'") for part in re.split(r"[,|;/]", text)]
-    return [part.lower() for part in parts if part]
+    return [_canonicalize_genre_name(part) for part in parts if part]
 
 
 def normalize_text_columns(df: pd.DataFrame) -> pd.DataFrame:
