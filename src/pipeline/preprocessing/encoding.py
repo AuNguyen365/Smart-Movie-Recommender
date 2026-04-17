@@ -80,7 +80,7 @@ def preprocess_features(df: pd.DataFrame) -> tuple[pd.DataFrame, sp.csr_matrix]:
 
     print("Step 7: Binary Encoding for source...")
     df["source_encoded"] = df["source"].map(
-        {"movie_final_dataset": 0, "trakt_ultimate_checkpoint": 1}
+        {"TMDB_cleaned": 0, "Trakt_cleaned": 1}
     )
 
     print("Step 8: Min-Max Scaling for release_year and genre_count...")
