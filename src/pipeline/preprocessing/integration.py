@@ -8,6 +8,14 @@ DATA_DIR = ROOT_DIR / "data"
 CLEANED_DIR = DATA_DIR / "cleaned"
 
 
+def _resolve_cleaned_input(*filenames: str) -> Path:
+    for name in filenames:
+        candidate = CLEANED_DIR / name
+        if candidate.exists():
+            return candidate
+    return CLEANED_DIR / filenames[0]
+
+
 def integrate_datasets(
     movie_path: Path,
     trakt_path: Path,
@@ -16,8 +24,8 @@ def integrate_datasets(
     d1 = pd.read_csv(movie_path)
     d2 = pd.read_csv(trakt_path)
 
-    d1["source"] = "movie_final_dataset"
-    d2["source"] = "trakt_ultimate_checkpoint"
+    d1["source"] = "TMDB_cleaned"
+    d2["source"] = "Trakt_cleaned"
 
     merged = pd.concat([d1, d2], ignore_index=True)
     before = len(merged)
@@ -36,7 +44,7 @@ def integrate_datasets(
     merged.to_csv(output_path, index=False)
 
     stats: dict[str, int | str] = {
-        "movie_rows": len(d1),
+        "tmdb_rows": len(d1),
         "trakt_rows": len(d2),
         "merged_before_dedup": before,
         "merged_after_exact_dedup": after_exact,
@@ -48,14 +56,18 @@ def integrate_datasets(
 
 
 def main() -> None:
-    p1 = CLEANED_DIR / "movie_final_dataset_cleaned.csv"
-    p2 = CLEANED_DIR / "trakt_ultimate_checkpoint_cleaned.csv"
+    p1 = _resolve_cleaned_input("TMDB_cleaned.csv", "movie_final_dataset_cleaned.csv")
+    p2 = _resolve_cleaned_input(
+        "Trakt_cleaned.csv",
+        "Trakt_cleaned .csv",
+        "trakt_ultimate_checkpoint_cleaned.csv",
+    )
     out = CLEANED_DIR / "integrated_dataset_cleaned.csv"
 
     _, stats = integrate_datasets(p1, p2, out)
 
     # Match original print order and style from scripts/integrate_datasets.py.
-    print("movie_rows", stats["movie_rows"])
+    print("tmdb_rows", stats["tmdb_rows"])
     print("trakt_rows", stats["trakt_rows"])
     print("merged_before_dedup", stats["merged_before_dedup"])
     print("merged_after_exact_dedup", stats["merged_after_exact_dedup"])
