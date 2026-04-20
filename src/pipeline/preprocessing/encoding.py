@@ -46,13 +46,19 @@ def preprocess_features(df: pd.DataFrame) -> tuple[pd.DataFrame, sp.csr_matrix]:
     df["cast"] = df["cast"].fillna("unknown")
 
     print("Step 2: Min-Max Scaling for rating...")
+
     scaler_rating = MinMaxScaler()
     df["rating_scaled"] = scaler_rating.fit_transform(df[["rating"]])
+
+    
     joblib.dump(scaler_rating, ENCODERS_DIR / "minmax_scaler_rating.pkl")
 
     print("Step 3: Multi-Label Binarizer for genres_list...")
+
     mlb = MultiLabelBinarizer()
     genre_matrix = mlb.fit_transform(df["genres_list_parsed"])
+
+
     genre_cols = [f"genre_{g.replace(' ', '_')}" for g in mlb.classes_]
     genre_df = pd.DataFrame(genre_matrix, columns=genre_cols, index=df.index)
     df = pd.concat([df, genre_df], axis=1)
@@ -66,16 +72,25 @@ def preprocess_features(df: pd.DataFrame) -> tuple[pd.DataFrame, sp.csr_matrix]:
     joblib.dump(le_genre, ENCODERS_DIR / "label_encoder_primary_genre.pkl")
 
     print("Step 5: Label Encoding for user_id and movie_id...")
-    le_user = LabelEncoder()
+    
     le_movie = LabelEncoder()
+
+    le_user = LabelEncoder()
     df["user_idx"] = le_user.fit_transform(df["user_id"].astype(str))
+
+
     df["movie_idx"] = le_movie.fit_transform(df["movie_id"].astype(str))
     joblib.dump(le_user, ENCODERS_DIR / "label_encoder_user.pkl")
     joblib.dump(le_movie, ENCODERS_DIR / "label_encoder_movie.pkl")
 
     print("Step 6: TF-IDF Encoding for cast...")
+
+
     tfidf_cast = TfidfVectorizer(max_features=500, token_pattern=r"[^,]+")
     cast_matrix = tfidf_cast.fit_transform(df["cast"])
+
+
+
     joblib.dump(tfidf_cast, ENCODERS_DIR / "tfidf_cast_vectorizer.pkl")
 
     print("Step 7: Binary Encoding for source...")
