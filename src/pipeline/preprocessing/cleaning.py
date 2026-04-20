@@ -18,6 +18,7 @@ class CleaningStats:
     dropped_missing_core_fields: int
 
 
+# ❌ ĐÃ BỎ timestamp
 COMMON_SCHEMA_COLUMNS = [
     "user_id",
     "movie_id",
@@ -27,7 +28,6 @@ COMMON_SCHEMA_COLUMNS = [
     "cast",
     "release_year",
     "language",
-    "timestamp",
     "release_year_clean",
     "genres_list",
     "primary_genre",
@@ -35,6 +35,7 @@ COMMON_SCHEMA_COLUMNS = [
 ]
 
 
+# ================== GENRE CLEAN ==================
 def _canonicalize_genre_name(name: str) -> str:
     normalized = name.strip().lower().replace("_", " ").replace("-", " ")
     normalized = re.sub(r"\s+", " ", normalized)
@@ -49,165 +50,145 @@ def _canonicalize_genre_name(name: str) -> str:
 
 def parse_genres(value: Any) -> list[str]:
     if isinstance(value, (list, tuple, set)):
-        names = []
-        for item in value:
-            if isinstance(item, dict) and item.get("name"):
-                names.append(_canonicalize_genre_name(str(item["name"])))
-            elif isinstance(item, str):
-                names.append(_canonicalize_genre_name(item))
-        return [x for x in names if x]
+        return [
+            _canonicalize_genre_name(str(item["name"])) if isinstance(item, dict) else _canonicalize_genre_name(str(item))
+            for item in value if item
+        ]
 
-    if isinstance(value, dict):
-        if value.get("name"):
-            return [_canonicalize_genre_name(str(value["name"]))]
-        return []
+    if isinstance(value, dict) and value.get("name"):
+        return [_canonicalize_genre_name(str(value["name"]))]
 
     if pd.isna(value):
         return []
 
-    raw_text = value.strip() if isinstance(value, str) else str(value).strip()
-    if not raw_text:
+    raw = str(value).strip()
+    if not raw:
         return []
 
     for parser in (json.loads, ast.literal_eval):
         try:
-            parsed = parser(raw_text)
+            parsed = parser(raw)
             if isinstance(parsed, list):
-                names = []
-                for item in parsed:
-                    if isinstance(item, dict) and item.get("name"):
-                        names.append(_canonicalize_genre_name(str(item["name"])))
-                    elif isinstance(item, str):
-                        names.append(_canonicalize_genre_name(item))
-                names = [x for x in names if x]
-                if names:
-                    return names
+                return [
+                    _canonicalize_genre_name(str(item["name"])) if isinstance(item, dict) else _canonicalize_genre_name(str(item))
+                    for item in parsed if item
+                ]
         except Exception:
             pass
 
-    text = raw_text.strip("[]")
-    parts = [part.strip().strip("\"'") for part in re.split(r"[,|;/]", text)]
-    return [_canonicalize_genre_name(part) for part in parts if part]
+    parts = re.split(r"[,|;/]", raw)
+    return [_canonicalize_genre_name(p.strip()) for p in parts if p.strip()]
 
 
+# ================== NORMALIZE ==================
 def normalize_text_columns(df: pd.DataFrame) -> pd.DataFrame:
-    obj_cols = df.select_dtypes(include=["object"]).columns
-    for col in obj_cols:
+    for col in df.select_dtypes(include=["object"]).columns:
         df[col] = df[col].map(lambda x: x.strip() if isinstance(x, str) else x)
     return df
 
 
 def standardize_columns(df: pd.DataFrame) -> pd.DataFrame:
-    normalized = df.copy()
-    normalized.columns = [c.strip() for c in normalized.columns]
+    df = df.copy()
+    df.columns = [c.strip() for c in df.columns]
 
-    numeric_candidates = ["rating", "vote_average", "vote_count"]
-    for col in numeric_candidates:
-        if col in normalized.columns:
-            normalized[col] = pd.to_numeric(normalized[col], errors="coerce")
+    for col in ["rating", "vote_average", "vote_count"]:
+        if col in df.columns:
+            df[col] = pd.to_numeric(df[col], errors="coerce")
 
-    if "release_year" in normalized.columns:
-        release_as_num = pd.to_numeric(normalized["release_year"], errors="coerce")
-        release_as_num = release_as_num.where(
-            release_as_num.between(1870, 2100), np.nan
-        )
-        release_parsed = pd.to_datetime(normalized["release_year"], errors="coerce")
-        normalized["release_year_clean"] = release_as_num.fillna(release_parsed.dt.year)
-        normalized["release_year_clean"] = normalized["release_year_clean"].astype("Int64")
+    if "release_year" in df.columns:
+        year_num = pd.to_numeric(df["release_year"], errors="coerce")
+        year_num = year_num.where(year_num.between(1870, 2100), np.nan)
 
-    if "timestamp" in normalized.columns:
-        normalized["timestamp"] = pd.to_datetime(normalized["timestamp"], errors="coerce")
+        year_parse = pd.to_datetime(df["release_year"], errors="coerce")
+        df["release_year_clean"] = year_num.fillna(year_parse.dt.year).astype("Int64")
 
-    if "language" in normalized.columns:
-        normalized["language"] = normalized["language"].str.lower()
+    if "language" in df.columns:
+        df["language"] = df["language"].str.lower()
 
-    if "genres" in normalized.columns:
-        normalized["genres_list"] = normalized["genres"].apply(parse_genres)
-        normalized["primary_genre"] = normalized["genres_list"].apply(
-            lambda x: x[0] if x else None   # ❌ không dùng "unknown"
-        )
-        normalized["genre_count"] = normalized["genres_list"].apply(len)
+    if "genres" in df.columns:
+        df["genres_list"] = df["genres"].apply(parse_genres)
+        df["primary_genre"] = df["genres_list"].apply(lambda x: x[0] if x else None)
+        df["genre_count"] = df["genres_list"].apply(len)
 
-    return normalized
+    return df
 
 
 def harmonize_schema(df: pd.DataFrame) -> pd.DataFrame:
-    harmonized = df.copy()
+    df = df.copy()
 
-    rename_map = {
-        "cast_names": "cast",
-    }
-    source_renames = {k: v for k, v in rename_map.items() if k in harmonized.columns}
-    if source_renames:
-        harmonized = harmonized.rename(columns=source_renames)
+    if "cast_names" in df.columns:
+        df = df.rename(columns={"cast_names": "cast"})
 
     for col in COMMON_SCHEMA_COLUMNS:
-        if col not in harmonized.columns:
-            harmonized[col] = pd.NA
+        if col not in df.columns:
+            df[col] = pd.NA
 
-    harmonized = harmonized[COMMON_SCHEMA_COLUMNS].copy()
-    return harmonized
+    return df[COMMON_SCHEMA_COLUMNS].copy()
 
 
+# ================== CLEAN MAIN ==================
 def clean_dataset(df: pd.DataFrame) -> tuple[pd.DataFrame, CleaningStats]:
-    cleaned = normalize_text_columns(df.copy())
-    cleaned = standardize_columns(cleaned)
-    cleaned = harmonize_schema(cleaned)
+    df = normalize_text_columns(df.copy())
+    df = standardize_columns(df)
+    df = harmonize_schema(df)
 
-    rows_before = len(cleaned)
+    rows_before = len(df)
 
-    # ===== REMOVE DUPLICATES =====
-    dedupe_view = cleaned.copy()
-    for col in dedupe_view.columns:
-        has_nested = dedupe_view[col].map(
-            lambda x: isinstance(x, (list, dict, set))
-        ).any()
-        if has_nested:
-            dedupe_view[col] = dedupe_view[col].map(
-                lambda x: json.dumps(sorted(x), sort_keys=True)
-                if isinstance(x, set)
-                else json.dumps(x, sort_keys=True)
-                if isinstance(x, (list, dict, set))
-                else x
-            )
+    # ===== REMOVE EXACT DUPLICATES =====
+    temp = df.copy()
+    for col in temp.columns:
+        if temp[col].apply(lambda x: isinstance(x, (list, dict, set))).any():
+            temp[col] = temp[col].apply(lambda x: json.dumps(x, sort_keys=True))
 
-    dedupe_mask = dedupe_view.duplicated()
-    deduped = cleaned.loc[~dedupe_mask].copy()
-    dropped_exact_duplicates = rows_before - len(deduped)
+    df = df.loc[~temp.duplicated()].copy()
+    after_exact = len(df)
 
-    # ===== DROP ALL MISSING IMPORTANT FIELDS =====
-    required_cols = ["user_id", "movie_id", "rating", "genres", "cast"]
-    required_cols = [c for c in required_cols if c in deduped.columns]
+    # ===== REMOVE DUPLICATE USER-MOVIE (QUAN TRỌNG) =====
+    df = df.drop_duplicates(subset=["user_id", "movie_id"], keep="last")
 
-    after_core = deduped.dropna(subset=required_cols).copy()
+    # ===== DROP MISSING =====
+    required = ["user_id", "movie_id", "rating", "genres", "cast"]
+    df = df.dropna(subset=[c for c in required if c in df.columns])
 
-    # ===== REMOVE EMPTY GENRES [] =====
-    if "genres_list" in after_core.columns:
-        after_core = after_core[after_core["genres_list"].map(len) > 0]
+    # ===== REMOVE GENRES RỖNG =====
+    df = df[df["genres_list"].map(len) > 0]
 
-    # ===== FILTER LANGUAGE =====
-    if "language" in after_core.columns:
-        after_core = after_core[
-            after_core["language"].astype(str).str.lower().eq("en")
-        ].copy()
+    # ===== FILTER ENGLISH =====
+    if "language" in df.columns:
+        df = df[df["language"] == "en"]
 
     stats = CleaningStats(
         rows_before=rows_before,
-        rows_after=len(after_core),
-        dropped_exact_duplicates=dropped_exact_duplicates,
-        dropped_missing_core_fields = len(deduped) - len(after_core),
+        rows_after=len(df),
+        dropped_exact_duplicates=rows_before - after_exact,
+        dropped_missing_core_fields=after_exact - len(df),
     )
 
-    return after_core, stats
+    return df, stats
 
 
+# ================== RATING FIX ==================
 def adjust_half_step_ratings(df: pd.DataFrame) -> pd.DataFrame:
-    adjusted = df.copy()
-    if "rating" not in adjusted.columns:
-        return adjusted
+    df = df.copy()
+    rating = pd.to_numeric(df["rating"], errors="coerce")
+    frac = rating - np.floor(rating)
+    mask = np.isclose(frac, 0.5)
+    df.loc[mask, "rating"] = rating.loc[mask] + 0.5
+    return df
 
-    rating = pd.to_numeric(adjusted["rating"], errors="coerce")
-    fractional = rating - np.floor(rating)
-    half_step_mask = np.isclose(fractional, 0.5)
-    adjusted.loc[half_step_mask, "rating"] = rating.loc[half_step_mask] + 0.5
-    return adjusted
+
+# ================== RUN ==================
+if __name__ == "__main__":
+    df = pd.read_csv(r"D:\Smart-Movie-Recommender\data\trakt_ultimate_checkpoint.csv")
+
+    cleaned_df, stats = clean_dataset(df)
+    cleaned_df = adjust_half_step_ratings(cleaned_df)
+
+    print("\n=== FINAL SHAPE ===")
+    print(cleaned_df.shape)
+
+    print("\n=== STATS ===")
+    print(stats)
+
+    cleaned_df.to_csv("cleaned_final.csv", index=False)
+    print("\nSaved: cleaned_final.csv")
