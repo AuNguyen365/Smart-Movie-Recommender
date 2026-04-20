@@ -179,16 +179,30 @@ def adjust_half_step_ratings(df: pd.DataFrame) -> pd.DataFrame:
 
 # ================== RUN ==================
 if __name__ == "__main__":
-    df = pd.read_csv(r"D:\Smart-Movie-Recommender\data\trakt_ultimate_checkpoint.csv")
+    import os
+    cleaned_dir = os.path.join("data", "cleaned")
+    os.makedirs(cleaned_dir, exist_ok=True)
 
-    cleaned_df, stats = clean_dataset(df)
-    cleaned_df = adjust_half_step_ratings(cleaned_df)
+    # Clean Trakt dataset
+    df_trakt = pd.read_csv(r"D:\Smart-Movie-Recommender\data\trakt_ultimate_checkpoint.csv")
+    cleaned_trakt, stats_trakt = clean_dataset(df_trakt)
+    cleaned_trakt = adjust_half_step_ratings(cleaned_trakt)
+    print("\n=== FINAL SHAPE (Trakt) ===")
+    print(cleaned_trakt.shape)
+    print("\n=== STATS (Trakt) ===")
+    print(stats_trakt)
+    path_trakt = os.path.join(cleaned_dir, "Trakt_cleaned.csv")
+    cleaned_trakt.to_csv(path_trakt, index=False)
+    print(f"\nSaved: {path_trakt}")
 
-    print("\n=== FINAL SHAPE ===")
-    print(cleaned_df.shape)
-
-    print("\n=== STATS ===")
-    print(stats)
-
-    cleaned_df.to_csv("cleaned_final.csv", index=False)
-    print("\nSaved: cleaned_final.csv")
+    # Clean Movie (TMDB) dataset
+    df_movie = pd.read_csv(r"D:\Smart-Movie-Recommender\data\movie_final_dataset.csv")
+    cleaned_movie, stats_movie = clean_dataset(df_movie)
+    cleaned_movie = adjust_half_step_ratings(cleaned_movie)
+    print("\n=== FINAL SHAPE (Movie) ===")
+    print(cleaned_movie.shape)
+    print("\n=== STATS (Movie) ===")
+    print(stats_movie)
+    path_tmdb = os.path.join(cleaned_dir, "TMDB_cleaned.csv")
+    cleaned_movie.to_csv(path_tmdb, index=False)
+    print(f"\nSaved: {path_tmdb}")

@@ -111,11 +111,6 @@ def _consolidate_fields(df: pd.DataFrame) -> pd.DataFrame:
 def transform_integrated_dataset(path: Path) -> pd.DataFrame:
     df = pd.read_csv(path)
 
-    # Normalize timestamp into a single ISO format with UTC suffix.
-    ts = pd.to_datetime(df["timestamp"], errors="coerce", format="mixed", utc=True)
-    if ts.isna().any():
-        raise ValueError(f"Found unparsable timestamp rows: {int(ts.isna().sum())}")
-    df["timestamp"] = ts.dt.strftime("%Y-%m-%dT%H:%M:%S.%f").str.slice(0, 23) + "Z"
 
     # Fill missing cast/genres by movie_id then movie_title fallback, then unknown.
     for col in ["cast", "genres"]:
@@ -167,7 +162,6 @@ def transform_integrated_dataset(path: Path) -> pd.DataFrame:
         df["genre_count"] = genres_list.apply(len)
 
     df = _consolidate_fields(df)
-    df = df.drop(columns=["timestamp"], errors="ignore")
 
     df.to_csv(path, index=False)
     return df
@@ -186,7 +180,6 @@ def main() -> None:
     empty_genres = int((df["genres"].astype(str).str.strip() == "").sum()) if "genres" in df.columns else -1
 
     print("rows", len(df))
-    print("timestamp_removed", "timestamp" not in df.columns)
     print("missing_pct_cast_genres", missing_pct)
     print("empty_cast", empty_cast)
     print("empty_genres", empty_genres)
