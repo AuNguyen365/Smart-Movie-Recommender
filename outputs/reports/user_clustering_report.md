@@ -59,5 +59,6 @@ Các cụm người dùng này có thể được sử dụng để:
 
 ## 7. Kết luận
 
-Đã hoàn thành phân cụm 2,958 người dùng thành 2 nhóm với chất lượng TRUNG BÌNH. 
+Đã hoàn thành phân cụm 2,958 người dùng thành 2 nhóm với 
+chất lượng TRUNG BÌNH. 
 Kết quả có thể tích hợp vào hệ thống gợi ý để cải thiện độ chính xác và cá nhân hóa.

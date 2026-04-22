@@ -20,6 +20,7 @@ MODELS_DIR.mkdir(parents=True, exist_ok=True)
 
 
 class MovieClusteringPipeline:
+    """Pipeline hoàn chỉnh cho phân cụm người dùng"""
     
     def __init__(self, data_path):
         self.data_path = data_path
