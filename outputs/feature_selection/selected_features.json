@@ -1,0 +1,33 @@
+{
+    "original_features": [
+        "rating_scaled",
+        "year_scaled",
+        "genre_count_scaled",
+        "genre_count",
+        "genre_action",
+        "genre_adventure",
+        "genre_animation",
+        "genre_comedy",
+        "genre_crime",
+        "genre_documentary",
+        "genre_drama",
+        "genre_family",
+        "genre_fantasy",
+        "genre_game_show",
+        "genre_history",
+        "genre_holiday",
+        "genre_horror",
+        "genre_music",
+        "genre_musical",
+        "genre_mystery",
+        "genre_romance",
+        "genre_science_fiction",
+        "genre_superhero",
+        "genre_suspense",
+        "genre_thriller",
+        "genre_tv_movie",
+        "genre_war",
+        "genre_western"
+    ],
+    "num_pca_components": 22
+}

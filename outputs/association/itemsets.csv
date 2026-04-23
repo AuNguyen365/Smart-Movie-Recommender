@@ -1,0 +1,213 @@
+itemsets_str,support,length
+['A Minecraft Movie'],0.006200177147918512,1
+['Arrival'],0.00354295837023915,1
+['Final Destination Bloodlines'],0.008857395925597875,1
+['Spider-Man: Homecoming'],0.00354295837023915,1
+['Plainclothes'],0.005314437555358724,1
+['The Housemaid'],0.00354295837023915,1
+['Is This Thing On?'],0.00354295837023915,1
+['Tenet'],0.005314437555358724,1
+['Unknown Number: The High School Catfish'],0.00354295837023915,1
+['Marty Supreme'],0.00354295837023915,1
+['John Wick: Chapter 3 - Parabellum'],0.008857395925597875,1
+['2000 Meters to Andriivka'],0.0044286979627989375,1
+['Oppenheimer'],0.0070859167404783,1
+['Saltburn'],0.00354295837023915,1
+['Jurassic Park'],0.007971656333038087,1
+['The Dark Knight Rises'],0.0070859167404783,1
+['John Wick: Chapter 2'],0.005314437555358724,1
+['John Wick'],0.005314437555358724,1
+['Deadpool'],0.0044286979627989375,1
+['Deadpool 2'],0.0044286979627989375,1
+['Puss in Boots: The Last Wish'],0.00354295837023915,1
+['It'],0.00354295837023915,1
+['It Chapter Two'],0.00354295837023915,1
+['Batman'],0.00354295837023915,1
+['Zootopia'],0.005314437555358724,1
+['The Usual Suspects'],0.0044286979627989375,1
+['The Shining'],0.00354295837023915,1
+['Sicario'],0.00354295837023915,1
+['All About Eve'],0.00354295837023915,1
+['Mission: Impossible - Dead Reckoning Part One'],0.0070859167404783,1
+['The Shawshank Redemption'],0.00974313551815766,1
+['F1'],0.005314437555358724,1
+['Black Panther'],0.006200177147918512,1
+['Warfare'],0.0044286979627989375,1
+['TRON: Ares'],0.00354295837023915,1
+['The Lord of the Rings: The Fellowship of the Ring'],0.005314437555358724,1
+['Bugonia'],0.005314437555358724,1
+['I Swear'],0.0070859167404783,1
+['Joker'],0.007971656333038087,1
+['Knives Out'],0.0070859167404783,1
+['Dune'],0.006200177147918512,1
+['The Father'],0.005314437555358724,1
+['Edge of Tomorrow'],0.005314437555358724,1
+['12 Angry Men'],0.005314437555358724,1
+['Casino Royale'],0.0044286979627989375,1
+['Once Upon a Time... in Hollywood'],0.0044286979627989375,1
+['Memento'],0.0044286979627989375,1
+['Inglourious Basterds'],0.00354295837023915,1
+['Batman Begins'],0.00354295837023915,1
+['Snow White'],0.00974313551815766,1
+['The Wild Robot'],0.00354295837023915,1
+['GOAT'],0.005314437555358724,1
+['The Wrong Paris'],0.005314437555358724,1
+['The Muppet Show'],0.0044286979627989375,1
+['Poor Things'],0.0044286979627989375,1
+['Wonka'],0.00354295837023915,1
+['28 Years Later: The Bone Temple'],0.0070859167404783,1
+['Sinners'],0.012400354295837024,1
+['One Battle After Another'],0.00974313551815766,1
+['Nuremberg'],0.006200177147918512,1
+"[""If I Had Legs I'd Kick You""]",0.005314437555358724,1
+['Wake Up Dead Man: A Knives Out Mystery'],0.005314437555358724,1
+['Wicked'],0.00354295837023915,1
+['Killers of the Flower Moon'],0.00354295837023915,1
+['The Martian'],0.0044286979627989375,1
+['Mission: Impossible - The Final Reckoning'],0.0044286979627989375,1
+['The Hateful Eight'],0.00354295837023915,1
+['Frankenstein'],0.0070859167404783,1
+['AEW All Out 2025'],0.00354295837023915,1
+['Aliens'],0.007971656333038087,1
+['Terminator 2: Judgment Day'],0.005314437555358724,1
+['Star Wars: The Force Awakens'],0.00354295837023915,1
+['Free Guy'],0.00354295837023915,1
+['The Bad Guys 2'],0.0044286979627989375,1
+['Code 3'],0.005314437555358724,1
+"[""Five Nights at Freddy's 2""]",0.0044286979627989375,1
+['Avengers: Infinity War'],0.0044286979627989375,1
+['Lilo & Stitch'],0.00974313551815766,1
+['Deathstalker'],0.0070859167404783,1
+['Materialists'],0.005314437555358724,1
+"[""One Flew Over the Cuckoo's Nest""]",0.00354295837023915,1
+['Superman'],0.00974313551815766,1
+['Deadpool & Wolverine'],0.0070859167404783,1
+['Spider-Man: No Way Home'],0.0070859167404783,1
+['The Suicide Squad'],0.0070859167404783,1
+['The Fantastic 4: First Steps'],0.0070859167404783,1
+['John Wick: Chapter 4'],0.0070859167404783,1
+['Predator: Badlands'],0.006200177147918512,1
+['Weapons'],0.005314437555358724,1
+['Bring Her Back'],0.0044286979627989375,1
+['Alien'],0.0070859167404783,1
+['Jaws'],0.0070859167404783,1
+['Spider-Man: Far From Home'],0.006200177147918512,1
+['Se7en'],0.0044286979627989375,1
+['The Lord of the Rings: The Two Towers'],0.0044286979627989375,1
+['The Empire Strikes Back'],0.00354295837023915,1
+['E.T. the Extra-Terrestrial'],0.00354295837023915,1
+['Mad Max: Fury Road'],0.0044286979627989375,1
+['Ready or Not: Here I Come'],0.005314437555358724,1
+['Rental Family'],0.006200177147918512,1
+['Relay'],0.005314437555358724,1
+['Influencers'],0.0044286979627989375,1
+['The Threesome'],0.00354295837023915,1
+['Bone Lake'],0.00354295837023915,1
+['Thunderbolts*'],0.005314437555358724,1
+['Baby Driver'],0.0044286979627989375,1
+['Smile 2'],0.0044286979627989375,1
+['Louis Theroux: Inside the Manosphere'],0.005314437555358724,1
+['Predator: Killer of Killers'],0.0044286979627989375,1
+['The Phoenician Scheme'],0.0044286979627989375,1
+['The Terminator'],0.006200177147918512,1
+['Ballerina'],0.00354295837023915,1
+['The Thing'],0.00354295837023915,1
+['The Truman Show'],0.0044286979627989375,1
+['The Avengers'],0.00354295837023915,1
+['Gladiator'],0.00354295837023915,1
+['Shelter'],0.00354295837023915,1
+['Inside Out'],0.00354295837023915,1
+['Everything Everywhere All at Once'],0.007971656333038087,1
+['Blade Runner'],0.0070859167404783,1
+['Iron Man'],0.005314437555358724,1
+['Hacksaw Ridge'],0.0044286979627989375,1
+['La La Land'],0.0044286979627989375,1
+['Gone Girl'],0.00354295837023915,1
+['Get Out'],0.00354295837023915,1
+['Wicked: For Good'],0.00354295837023915,1
+['Soul'],0.00354295837023915,1
+['Zootopia 2'],0.005314437555358724,1
+['Skyfall'],0.006200177147918512,1
+['Taken'],0.0044286979627989375,1
+['The Matrix'],0.00354295837023915,1
+['Wonder Woman'],0.006200177147918512,1
+['Dr. No'],0.005314437555358724,1
+['The Hunt'],0.00354295837023915,1
+['Pretty Woman'],0.00354295837023915,1
+['Captain America: The Winter Soldier'],0.005314437555358724,1
+['Die Hard'],0.005314437555358724,1
+['Captain America: The First Avenger'],0.0044286979627989375,1
+['Thor: Ragnarok'],0.00354295837023915,1
+['Toy Story 3'],0.00354295837023915,1
+['Avengers: Endgame'],0.00354295837023915,1
+['28 Days Later'],0.00354295837023915,1
+['Turning Red'],0.005314437555358724,1
+['Nobody'],0.0044286979627989375,1
+['Cruella'],0.00354295837023915,1
+['Mercy'],0.00354295837023915,1
+['Wick Is Pain'],0.0044286979627989375,1
+['A Nice Indian Boy'],0.005314437555358724,1
+['Dune: Part Two'],0.00354295837023915,1
+['KPop Demon Hunters'],0.0070859167404783,1
+['She Rides Shotgun'],0.00354295837023915,1
+['The Life of Chuck'],0.005314437555358724,1
+['Back to the Future'],0.005314437555358724,1
+['2001: A Space Odyssey'],0.00354295837023915,1
+['The Batman'],0.0070859167404783,1
+['Wrath of Man'],0.00354295837023915,1
+['No Country for Old Men'],0.00354295837023915,1
+['Batman v Superman: Dawn of Justice'],0.0044286979627989375,1
+['The Dark Knight'],0.005314437555358724,1
+['Iron Lung'],0.00354295837023915,1
+['The Mummy'],0.0044286979627989375,1
+['Prisoners'],0.00354295837023915,1
+['Ready or Not'],0.00354295837023915,1
+['Top Gun: Maverick'],0.0070859167404783,1
+['Song Sung Blue'],0.00354295837023915,1
+['Project Hail Mary'],0.006200177147918512,1
+['A Quiet Place'],0.0044286979627989375,1
+['The Salt Path'],0.0044286979627989375,1
+['Blue Moon'],0.0044286979627989375,1
+['Glass Onion: A Knives Out Mystery'],0.0044286979627989375,1
+['The Substance'],0.0044286979627989375,1
+['The Super Mario Bros. Movie'],0.00354295837023915,1
+['The Bride!'],0.00354295837023915,1
+['Fight Club'],0.00354295837023915,1
+"[""Zack Snyder's Justice League""]",0.00354295837023915,1
+['Interstellar'],0.008857395925597875,1
+['The Revenant'],0.00354295837023915,1
+['Train Dreams'],0.0044286979627989375,1
+['King Richard'],0.00354295837023915,1
+['Grenfell: Uncovered'],0.00354295837023915,1
+['Sovereign'],0.00354295837023915,1
+['How to Train Your Dragon'],0.007971656333038087,1
+['Troy'],0.00354295837023915,1
+['The Godfather'],0.00354295837023915,1
+['Armageddon'],0.00354295837023915,1
+['Hoppers'],0.005314437555358724,1
+['The Man from U.N.C.L.E.'],0.00354295837023915,1
+['Django Unchained'],0.00354295837023915,1
+['Swiped'],0.00354295837023915,1
+['Karate Kid: Legends'],0.00354295837023915,1
+['Bambi: The Reckoning'],0.00354295837023915,1
+['The Thursday Murder Club'],0.00354295837023915,1
+['Before We Forget'],0.005314437555358724,1
+['The Ballad of Wallis Island'],0.0044286979627989375,1
+['Solo Mio'],0.00354295837023915,1
+['Roofman'],0.00354295837023915,1
+['American Sweatshop'],0.00354295837023915,1
+['Sharp Corner'],0.00354295837023915,1
+['Dolly'],0.0044286979627989375,1
+['Space Cadet'],0.00354295837023915,1
+"['John Wick: Chapter 3 - Parabellum', 'John Wick']",0.00354295837023915,2
+"['Dune', 'The Father']",0.00354295837023915,2
+"['Joker', 'Once Upon a Time... in Hollywood']",0.00354295837023915,2
+"['Sinners', 'Wicked']",0.00354295837023915,2
+"['Mission: Impossible - The Final Reckoning', 'Mission: Impossible - Dead Reckoning Part One']",0.00354295837023915,2
+"['The Fantastic 4: First Steps', 'Superman']",0.00354295837023915,2
+"['Aliens', 'Alien']",0.00354295837023915,2
+"['Everything Everywhere All at Once', 'Iron Man']",0.00354295837023915,2
+"['John Wick: Chapter 3 - Parabellum', 'Captain America: The Winter Soldier']",0.00354295837023915,2
+"['Captain America: The Winter Soldier', 'Skyfall']",0.00354295837023915,2
+"['Top Gun: Maverick', 'Everything Everywhere All at Once']",0.00354295837023915,2
+"['Everything Everywhere All at Once', 'Glass Onion: A Knives Out Mystery']",0.00354295837023915,2

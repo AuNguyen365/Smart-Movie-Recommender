@@ -1,0 +1,501 @@
+user_id,movie_id,movie_title,score,rank
+(not) mAk1ko,1128212,The Last Rodeo,0.09,1
+(not) mAk1ko,1103676,The Mastermind,0.08,2
+(not) mAk1ko,1081550,"Sorry, Baby",0.08,3
+(not) mAk1ko,912836,Marshmallow,0.08,4
+(not) mAk1ko,1079176,Sketch,0.08,5
+(not) mAk1ko,918266,Is This Thing On?,0.07,6
+(not) mAk1ko,977463,Eleanor the Great,0.07,7
+(not) mAk1ko,553090,Rust,0.07,8
+(not) mAk1ko,701249,Peaky Blinders: The Immortal Man,0.07,9
+(not) mAk1ko,1005440,A Big Bold Beautiful Journey,0.07,10
++schmoogie,1015572,Deathstalker,0.26,1
++schmoogie,1050424,Shelter,0.22,2
++schmoogie,1045938,Dangerous Animals,0.22,3
++schmoogie,1183117,EPiC: Elvis Presley in Concert,0.17,4
++schmoogie,874955,Relay,0.14,5
++schmoogie,467065,Long Distance,0.13,6
++schmoogie,1096228,Redux Redux,0.13,7
++schmoogie,912836,Marshmallow,0.13,8
++schmoogie,1065701,The Rip,0.11,9
++schmoogie,979223,Monster Island,0.11,10
+-LBJ-,402431,Wicked,0.31,1
+-LBJ-,701387,Bugonia,0.27,2
+-LBJ-,1233413,Sinners,0.26,3
+-LBJ-,1140498,Is This Thing On?,0.26,4
+-LBJ-,1160360,If I Had Legs I'd Kick You,0.26,5
+-LBJ-,1214931,Nuremberg,0.25,6
+-LBJ-,1259102,Eternity,0.24,7
+-LBJ-,1316092,"""Wuthering Heights""",0.24,8
+-LBJ-,812583,Wake Up Dead Man: A Knives Out Mystery,0.23,9
+-LBJ-,648878,Eddington,0.23,10
+.,9502,Kung Fu Panda,0.0,1
+.,269149,Zootopia,0.0,2
+.,1084242,Zootopia 2,0.0,3
+.,102899,Ant-Man,0.0,4
+.,508947,Turning Red,0.0,5
+.,1242898,Predator: Badlands,0.0,6
+.,949,Heat,0.0,7
+.,140300,Kung Fu Panda 3,0.0,8
+.,38055,Megamind,0.0,9
+.,1635,The Island,0.0,10
+02ed4d803049e3e76f12c7b9a60248f2,1270365,The Muppet Show,0.13,1
+02ed4d803049e3e76f12c7b9a60248f2,1226951,To Get Her,0.12,2
+02ed4d803049e3e76f12c7b9a60248f2,1005421,Together,0.1,3
+02ed4d803049e3e76f12c7b9a60248f2,1050424,Shelter,0.09,4
+02ed4d803049e3e76f12c7b9a60248f2,1005440,A Big Bold Beautiful Journey,0.08,5
+02ed4d803049e3e76f12c7b9a60248f2,1193274,Titanic: The Digital Resurrection,0.08,6
+02ed4d803049e3e76f12c7b9a60248f2,1045938,Dangerous Animals,0.08,7
+02ed4d803049e3e76f12c7b9a60248f2,638383,KPop Demon Hunters,0.08,8
+02ed4d803049e3e76f12c7b9a60248f2,1065701,The Rip,0.07,9
+02ed4d803049e3e76f12c7b9a60248f2,977350,Hallow Road,0.07,10
+0w2k4xa0,1057839,GOAT,1.14,1
+0w2k4xa0,763995,A Minecraft Movie,1.13,2
+0w2k4xa0,1076539,I Swear,1.0,3
+0w2k4xa0,540330,Cold Storage,0.75,4
+0w2k4xa0,796977,The SpongeBob Movie: Search for SquarePants,0.71,5
+0w2k4xa0,385396,TRON: Ares,0.58,6
+0w2k4xa0,918266,Is This Thing On?,0.49,7
+0w2k4xa0,992825,Five Nights at Freddy's 2,0.46,8
+0w2k4xa0,1270365,The Muppet Show,0.41,9
+0w2k4xa0,860421,Jay Kelly,0.4,10
+34KLD,1076539,I Swear,0.55,1
+34KLD,1057839,GOAT,0.49,2
+34KLD,540330,Cold Storage,0.39,3
+34KLD,763995,A Minecraft Movie,0.34,4
+34KLD,796977,The SpongeBob Movie: Search for SquarePants,0.34,5
+34KLD,918266,Is This Thing On?,0.24,6
+34KLD,992825,Five Nights at Freddy's 2,0.22,7
+34KLD,1085761,Hoppers,0.1,8
+34KLD,871548,Pretty Lethal,0.09,9
+34KLD,1270365,The Muppet Show,0.09,10
+35antonio,1172905,AEW Dynasty 2025,0.3,1
+35antonio,1217313,AEW All Out 2025,0.29,2
+35antonio,1166945,WWE Clash in Paris 2025,0.28,3
+35antonio,1252288,AEW Full Gear 2025,0.28,4
+35antonio,1254723,AEW Worlds End 2025,0.27,5
+35antonio,1045560,WrestleMania 41: Sunday,0.24,6
+35antonio,1045559,WrestleMania 41: Saturday,0.23,7
+35antonio,1186205,WWE Backlash 2025,0.2,8
+35antonio,1258183,WWE Wrestlepalooza,0.2,9
+35antonio,1202875,WWE Money in the Bank 2025,0.2,10
+43543875,830830,In the Blink of an Eye,0.3,1
+43543875,1354831,Louis Theroux: Inside the Manosphere,0.28,2
+43543875,925930,Honey Don't!,0.26,3
+43543875,1156005,Melania,0.26,4
+43543875,907496,The Salt Path,0.24,5
+43543875,1050875,Solo Mio,0.24,6
+43543875,829742,What We Hide,0.23,7
+43543875,1047409,Christy,0.22,8
+43543875,1066508,My Oxford Year,0.22,9
+43543875,1153578,The Death of Snow White,0.2,10
+4EverFinalGirl,871499,Zootopia 2,0.0,1
+4EverFinalGirl,646497,Wake Up Dead Man: A Knives Out Mystery,0.0,2
+4EverFinalGirl,792648,HIM,0.0,3
+4EverFinalGirl,977993,Fight or Flight,0.0,4
+4EverFinalGirl,832642,The Naked Gun,0.0,5
+4EverFinalGirl,873974,How to Train Your Dragon,0.0,6
+4EverFinalGirl,1005401,Train Dreams,0.0,7
+4EverFinalGirl,787126,Freaky Tales,0.0,8
+4EverFinalGirl,1069638,Dolly,0.0,9
+4EverFinalGirl,1261317,Andrew Santino: White Noise,0.0,10
+5rJoud,361743,Top Gun: Maverick,0.45,1
+5rJoud,348,Alien,0.42,2
+5rJoud,8077,Alien³,0.37,3
+5rJoud,593643,The Menu,0.34,4
+5rJoud,324786,Hacksaw Ridge,0.31,5
+5rJoud,679,Aliens,0.31,6
+5rJoud,436270,Black Adam,0.3,7
+5rJoud,78,Blade Runner,0.28,8
+5rJoud,545611,Everything Everywhere All at Once,0.27,9
+5rJoud,11,Star Wars,0.25,10
+8ZN,830830,In the Blink of an Eye,0.87,1
+8ZN,1354831,Louis Theroux: Inside the Manosphere,0.7,2
+8ZN,1156005,Melania,0.63,3
+8ZN,1047409,Christy,0.62,4
+8ZN,907496,The Salt Path,0.6,5
+8ZN,925930,Honey Don't!,0.58,6
+8ZN,829742,What We Hide,0.57,7
+8ZN,1050875,Solo Mio,0.51,8
+8ZN,1153578,The Death of Snow White,0.46,9
+8ZN,1006354,Z-O-M-B-I-E-S 4: Dawn of the Vampires,0.42,10
+99jaani,574475,Final Destination Bloodlines,0.6,1
+99jaani,1233413,Sinners,0.51,2
+99jaani,945961,Alien: Romulus,0.41,3
+99jaani,244786,Whiplash,0.41,4
+99jaani,926393,The Equalizer 3,0.38,5
+99jaani,639933,The Northman,0.33,6
+99jaani,1265609,War Machine,0.3,7
+99jaani,1078605,Weapons,0.29,8
+99jaani,539972,Kraven the Hunter,0.29,9
+99jaani,273481,Sicario,0.27,10
+A Fan of Many Things,315635,Spider-Man: Homecoming,0.2,1
+A Fan of Many Things,10439,Hocus Pocus,0.19,2
+A Fan of Many Things,335983,Venom,0.19,3
+A Fan of Many Things,11,Star Wars,0.19,4
+A Fan of Many Things,9806,The Incredibles,0.19,5
+A Fan of Many Things,260513,Incredibles 2,0.19,6
+A Fan of Many Things,569094,Spider-Man: Across the Spider-Verse,0.18,7
+A Fan of Many Things,216015,Fifty Shades of Grey,0.18,8
+A Fan of Many Things,917496,Beetlejuice Beetlejuice,0.18,9
+A Fan of Many Things,1891,The Empire Strikes Back,0.18,10
+ABSTRACTlegend,1050424,Shelter,0.26,1
+ABSTRACTlegend,874955,Relay,0.23,2
+ABSTRACTlegend,998723,Anaconda,0.23,3
+ABSTRACTlegend,1045938,Dangerous Animals,0.21,4
+ABSTRACTlegend,977350,Hallow Road,0.17,5
+ABSTRACTlegend,1226951,To Get Her,0.16,6
+ABSTRACTlegend,967810,Send Help,0.15,7
+ABSTRACTlegend,962950,Whistle,0.14,8
+ABSTRACTlegend,1014382,Vicious,0.14,9
+ABSTRACTlegend,1210299,Influencers,0.14,10
+AJGibbs,315635,Spider-Man: Homecoming,0.08,1
+AJGibbs,10439,Hocus Pocus,0.08,2
+AJGibbs,335983,Venom,0.08,3
+AJGibbs,11,Star Wars,0.08,4
+AJGibbs,9806,The Incredibles,0.08,5
+AJGibbs,260513,Incredibles 2,0.08,6
+AJGibbs,569094,Spider-Man: Across the Spider-Verse,0.07,7
+AJGibbs,216015,Fifty Shades of Grey,0.07,8
+AJGibbs,917496,Beetlejuice Beetlejuice,0.07,9
+AJGibbs,1891,The Empire Strikes Back,0.07,10
+AP_CHIN,1018063,Plainclothes,0.74,1
+AP_CHIN,854887,Frankenstein,0.66,2
+AP_CHIN,1145888,The Perfect Neighbor,0.57,3
+AP_CHIN,1005401,Train Dreams,0.56,4
+AP_CHIN,1193274,Titanic: The Digital Resurrection,0.56,5
+AP_CHIN,1167078,STRAW,0.53,6
+AP_CHIN,1251092,All the Empty Rooms,0.52,7
+AP_CHIN,638383,KPop Demon Hunters,0.48,8
+AP_CHIN,1163238,Armed Only with a Camera: The Life and Death of Brent Renaud,0.47,9
+AP_CHIN,1000306,The Lost Bus,0.46,10
+ATrain0,599275,The Smashing Machine,0.43,1
+ATrain0,1119747,Song Sung Blue,0.37,2
+ATrain0,1027747,Ready or Not: Here I Come,0.37,3
+ATrain0,1015572,Deathstalker,0.37,4
+ATrain0,1059479,Blue Moon,0.35,5
+ATrain0,787126,Freaky Tales,0.32,6
+ATrain0,1093997,Splitsville,0.23,7
+ATrain0,792648,HIM,0.21,8
+ATrain0,1005401,Train Dreams,0.21,9
+ATrain0,1183117,EPiC: Elvis Presley in Concert,0.2,10
+Aaaidan,593643,The Menu,0.22,1
+Aaaidan,361743,Top Gun: Maverick,0.16,2
+Aaaidan,597,Titanic,0.14,3
+Aaaidan,760104,X,0.1,4
+Aaaidan,545611,Everything Everywhere All at Once,0.1,5
+Aaaidan,558449,Gladiator II,0.1,6
+Aaaidan,933260,The Substance,0.1,7
+Aaaidan,950396,The Gorge,0.09,8
+Aaaidan,615457,Nobody,0.09,9
+Aaaidan,9552,The Exorcist,0.09,10
+AblissMusic,948183,The Bad Guys 2,0.74,1
+AblissMusic,1005789,Roofman,0.58,2
+AblissMusic,897095,Good Fortune,0.58,3
+AblissMusic,1010850,Playdate,0.53,4
+AblissMusic,848797,One Battle After Another,0.48,5
+AblissMusic,1270365,The Muppet Show,0.46,6
+AblissMusic,831157,Die My Love,0.42,7
+AblissMusic,392717,Ballerina,0.39,8
+AblissMusic,1009138,Caught Stealing,0.39,9
+AblissMusic,810123,Nobody 2,0.38,10
+Acoucalancha,1015572,Deathstalker,0.62,1
+Acoucalancha,1121768,V/H/S/Halloween,0.52,2
+Acoucalancha,1088587,Bone Lake,0.51,3
+Acoucalancha,556167,Clown in a Cornfield,0.5,4
+Acoucalancha,1232711,Night of the Reaper,0.42,5
+Acoucalancha,1214573,Mother of Flies,0.42,6
+Acoucalancha,873797,The Penguin Lessons,0.39,7
+Acoucalancha,673313,Sacramento,0.38,8
+Acoucalancha,787126,Freaky Tales,0.36,9
+Acoucalancha,1210299,Influencers,0.35,10
+Adson68,634649,Spider-Man: No Way Home,0.03,1
+Adson68,414906,The Batman,0.03,2
+Adson68,646385,Scream,0.02,3
+Adson68,934433,Scream VI,0.02,4
+Adson68,361743,Top Gun: Maverick,0.02,5
+Adson68,756999,The Black Phone,0.02,6
+Adson68,312221,Creed,0.02,7
+Adson68,438631,Dune,0.02,8
+Adson68,335787,Uncharted,0.02,9
+Adson68,791373,Zack Snyder's Justice League,0.02,10
+Advised,1009138,Caught Stealing,0.03,1
+Advised,952739,Guns Up,0.02,2
+Advised,1145947,In Search of Darkness: 1995-1999,0.02,3
+Advised,1237183,Ozzy: No Escape from Now,0.02,4
+Advised,906431,Anniversary,0.02,5
+Advised,1189152,Grenfell: Uncovered,0.02,6
+Advised,1252892,Sharon & Ozzy Osbourne: Coming Home,0.02,7
+Advised,948183,The Bad Guys 2,0.02,8
+Advised,1317203,I'm Chevy Chase and You're Not,0.02,9
+Advised,596892,Shadow Force,0.02,10
+Aerofly,907055,Diablo,0.82,1
+Aerofly,1079122,Hostile Takeover,0.5,2
+Aerofly,1206669,Wick Is Pain,0.48,3
+Aerofly,540330,Cold Storage,0.47,4
+Aerofly,1086071,One Mile: Chapter One,0.43,5
+Aerofly,1133930,Hunting Season,0.38,6
+Aerofly,1337869,One Last Adventure: The Making of Stranger Things 5,0.36,7
+Aerofly,839410,Dust Bunny,0.36,8
+Aerofly,812253,The Strangers: Chapter 3,0.36,9
+Aerofly,1087103,Prisoner of War,0.36,10
+Agent24,1337869,One Last Adventure: The Making of Stranger Things 5,0.31,1
+Agent24,996831,Until Dawn,0.3,2
+Agent24,839410,Dust Bunny,0.3,3
+Agent24,1133930,Hunting Season,0.29,4
+Agent24,907055,Diablo,0.28,5
+Agent24,1086071,One Mile: Chapter One,0.26,6
+Agent24,1087103,Prisoner of War,0.24,7
+Agent24,596892,Shadow Force,0.24,8
+Agent24,1358280,The Couple Across the Street,0.23,9
+Agent24,1179754,My Secret Santa,0.23,10
+AgentPigleton,449045,The Long Walk,0.13,1
+AgentPigleton,1073153,The Map That Leads to You,0.12,2
+AgentPigleton,913892,The Senior,0.12,3
+AgentPigleton,810123,Nobody 2,0.12,4
+AgentPigleton,832181,People We Meet on Vacation,0.11,5
+AgentPigleton,556167,Clown in a Cornfield,0.11,6
+AgentPigleton,1007761,Beast of War,0.11,7
+AgentPigleton,1184977,I Can Only Imagine 2,0.11,8
+AgentPigleton,1116720,Reminders of Him,0.1,9
+AgentPigleton,1050875,Solo Mio,0.1,10
+Ahmad,361743,Top Gun: Maverick,0.39,1
+Ahmad,436270,Black Adam,0.3,2
+Ahmad,791373,Zack Snyder's Justice League,0.19,3
+Ahmad,985939,Fall,0.19,4
+Ahmad,603692,John Wick: Chapter 4,0.19,5
+Ahmad,593643,The Menu,0.18,6
+Ahmad,941,Lethal Weapon,0.15,7
+Ahmad,333339,Ready Player One,0.14,8
+Ahmad,739405,Operation Fortune: Ruse de Guerre,0.14,9
+Ahmad,297762,Wonder Woman,0.14,10
+Ahmetaslan27,244786,Whiplash,8.83,1
+Ahmetaslan27,1233413,Sinners,8.43,2
+Ahmetaslan27,545611,Everything Everywhere All at Once,6.06,3
+Ahmetaslan27,577922,Tenet,5.88,4
+Ahmetaslan27,546554,Knives Out,5.39,5
+Ahmetaslan27,639933,The Northman,4.77,6
+Ahmetaslan27,646389,Plane,4.27,7
+Ahmetaslan27,273481,Sicario,4.27,8
+Ahmetaslan27,786,Almost Famous,3.97,9
+Ahmetaslan27,823464,Godzilla x Kong: The New Empire,3.52,10
+Ajsjjpp,948183,The Bad Guys 2,0.07,1
+Ajsjjpp,1005789,Roofman,0.05,2
+Ajsjjpp,897095,Good Fortune,0.05,3
+Ajsjjpp,1010850,Playdate,0.05,4
+Ajsjjpp,848797,One Battle After Another,0.04,5
+Ajsjjpp,831157,Die My Love,0.04,6
+Ajsjjpp,1009138,Caught Stealing,0.04,7
+Ajsjjpp,599275,The Smashing Machine,0.04,8
+Ajsjjpp,392717,Ballerina,0.04,9
+Ajsjjpp,810123,Nobody 2,0.03,10
+Albert,679,Aliens,0.19,1
+Albert,339403,Baby Driver,0.18,2
+Albert,209112,Batman v Superman: Dawn of Justice,0.18,3
+Albert,268,Batman,0.17,4
+Albert,245891,John Wick,0.17,5
+Albert,95,Armageddon,0.16,6
+Albert,39514,RED,0.16,7
+Albert,329,Jurassic Park,0.15,8
+Albert,105,Back to the Future,0.15,9
+Albert,240832,Lucy,0.15,10
+Aless Saulea,952739,Guns Up,0.0,1
+Aless Saulea,1018063,Plainclothes,0.0,2
+Aless Saulea,1005401,Train Dreams,0.0,3
+Aless Saulea,1009138,Caught Stealing,0.0,4
+Aless Saulea,673173,The Life of Chuck,0.0,5
+Aless Saulea,906431,Anniversary,0.0,6
+Aless Saulea,244786,Whiplash,0.0,7
+Aless Saulea,1145947,In Search of Darkness: 1995-1999,0.0,8
+Aless Saulea,1210299,Influencers,0.0,9
+Aless Saulea,1237183,Ozzy: No Escape from Now,0.0,10
+Alexzilla,882470,Echo Valley,0.17,1
+Alexzilla,1103789,Maintenance Required,0.16,2
+Alexzilla,432889,Not Without Hope,0.15,3
+Alexzilla,965643,She Rides Shotgun,0.15,4
+Alexzilla,874955,Relay,0.15,5
+Alexzilla,979297,Nuremberg,0.15,6
+Alexzilla,908389,The Surfer,0.12,7
+Alexzilla,1018119,Merv,0.12,8
+Alexzilla,1008117,Sharp Corner,0.12,9
+Alexzilla,1036669,Restless,0.12,10
+AliHawke,948183,The Bad Guys 2,0.56,1
+AliHawke,1005789,Roofman,0.43,2
+AliHawke,897095,Good Fortune,0.4,3
+AliHawke,1010850,Playdate,0.4,4
+AliHawke,848797,One Battle After Another,0.37,5
+AliHawke,1009138,Caught Stealing,0.36,6
+AliHawke,831157,Die My Love,0.31,7
+AliHawke,599275,The Smashing Machine,0.3,8
+AliHawke,392717,Ballerina,0.29,9
+AliHawke,1065701,The Rip,0.27,10
+All Things Movies and TV,218,The Terminator,0.33,1
+All Things Movies and TV,2832,Identity,0.32,2
+All Things Movies and TV,280,Terminator 2: Judgment Day,0.31,3
+All Things Movies and TV,2501,The Bourne Identity,0.27,4
+All Things Movies and TV,629,The Usual Suspects,0.26,5
+All Things Movies and TV,438148,Minions: The Rise of Gru,0.26,6
+All Things Movies and TV,575264,Mission: Impossible - Dead Reckoning Part One,0.25,7
+All Things Movies and TV,315162,Puss in Boots: The Last Wish,0.24,8
+All Things Movies and TV,27205,Inception,0.24,9
+All Things Movies and TV,297802,Aquaman,0.23,10
+Almando,1233413,Sinners,0.74,1
+Almando,402431,Wicked,0.69,2
+Almando,1233575,Black Bag,0.36,3
+Almando,701387,Bugonia,0.35,4
+Almando,1140498,Is This Thing On?,0.35,5
+Almando,1259102,Eternity,0.35,6
+Almando,1160360,If I Had Legs I'd Kick You,0.33,7
+Almando,549509,The Brutalist,0.32,8
+Almando,967941,Wicked: For Good,0.32,9
+Almando,696506,Mickey 17,0.32,10
+AlphaonTrakt,810123,Nobody 2,0.86,1
+AlphaonTrakt,1005789,Roofman,0.73,2
+AlphaonTrakt,897095,Good Fortune,0.72,3
+AlphaonTrakt,1270365,The Muppet Show,0.68,4
+AlphaonTrakt,1050875,Solo Mio,0.66,5
+AlphaonTrakt,948183,The Bad Guys 2,0.58,6
+AlphaonTrakt,1028536,Bad Man,0.53,7
+AlphaonTrakt,1010850,Playdate,0.49,8
+AlphaonTrakt,947485,Fackham Hall,0.47,9
+AlphaonTrakt,1112909,The Family Plan 2,0.45,10
+AltarOfSins,1270365,The Muppet Show,0.0,1
+AltarOfSins,9502,Kung Fu Panda,0.0,2
+AltarOfSins,474350,It Chapter Two,0.0,3
+AltarOfSins,1172905,AEW Dynasty 2025,0.0,4
+AltarOfSins,1084242,Zootopia 2,0.0,5
+AltarOfSins,1167078,STRAW,0.0,6
+AltarOfSins,853702,Superman,0.0,7
+AltarOfSins,1166945,WWE Clash in Paris 2025,0.0,8
+AltarOfSins,1217313,AEW All Out 2025,0.0,9
+AltarOfSins,269149,Zootopia,0.0,10
+AmazoniaNOTAmazon,679,Aliens,0.63,1
+AmazoniaNOTAmazon,348,Alien,0.39,2
+AmazoniaNOTAmazon,245891,John Wick,0.23,3
+AmazoniaNOTAmazon,567609,Ready or Not,0.23,4
+AmazoniaNOTAmazon,339403,Baby Driver,0.23,5
+AmazoniaNOTAmazon,313369,La La Land,0.21,6
+AmazoniaNOTAmazon,141,Donnie Darko,0.2,7
+AmazoniaNOTAmazon,209112,Batman v Superman: Dawn of Justice,0.2,8
+AmazoniaNOTAmazon,268,Batman,0.19,9
+AmazoniaNOTAmazon,95,Armageddon,0.19,10
+Amos Burton,634649,Spider-Man: No Way Home,0.03,1
+Amos Burton,414906,The Batman,0.02,2
+Amos Burton,616037,Thor: Love and Thunder,0.02,3
+Amos Burton,505642,Black Panther: Wakanda Forever,0.02,4
+Amos Burton,312221,Creed,0.02,5
+Amos Burton,361743,Top Gun: Maverick,0.02,6
+Amos Burton,646385,Scream,0.02,7
+Amos Burton,502356,The Super Mario Bros. Movie,0.02,8
+Amos Burton,934433,Scream VI,0.02,9
+Amos Burton,1091,The Thing,0.02,10
+Andres Gomez,389,12 Angry Men,10.12,1
+Andres Gomez,694,The Shining,9.99,2
+Andres Gomez,705,All About Eve,9.75,3
+Andres Gomez,244786,Whiplash,9.39,4
+Andres Gomez,50014,The Help,9.38,5
+Andres Gomez,269149,Zootopia,9.27,6
+Andres Gomez,87827,Life of Pi,8.95,7
+Andres Gomez,3090,The Treasure of the Sierra Madre,8.7,8
+Andres Gomez,102651,Maleficent,8.68,9
+Andres Gomez,76203,12 Years a Slave,8.26,10
+Angel Rodríguez,278,The Shawshank Redemption,0.92,1
+Angel Rodríguez,9340,The Goonies,0.48,2
+Angel Rodríguez,533535,Deadpool & Wolverine,0.44,3
+Angel Rodríguez,238,The Godfather,0.4,4
+Angel Rodríguez,8681,Taken,0.39,5
+Angel Rodríguez,399579,Alita: Battle Angel,0.38,6
+Angel Rodríguez,11324,Shutter Island,0.35,7
+Angel Rodríguez,597,Titanic,0.35,8
+Angel Rodríguez,9802,The Rock,0.35,9
+Angel Rodríguez,37165,The Truman Show,0.33,10
+AngelPlushed,1270365,The Muppet Show,0.03,1
+AngelPlushed,897095,Good Fortune,0.02,2
+AngelPlushed,810123,Nobody 2,0.02,3
+AngelPlushed,948183,The Bad Guys 2,0.02,4
+AngelPlushed,1005789,Roofman,0.02,5
+AngelPlushed,1010850,Playdate,0.02,6
+AngelPlushed,848797,One Battle After Another,0.02,7
+AngelPlushed,1050875,Solo Mio,0.01,8
+AngelPlushed,947485,Fackham Hall,0.01,9
+AngelPlushed,392717,Ballerina,0.01,10
+Angelishere,977993,Fight or Flight,0.01,1
+Angelishere,871499,Zootopia 2,0.01,2
+Angelishere,646497,Wake Up Dead Man: A Knives Out Mystery,0.01,3
+Angelishere,832642,The Naked Gun,0.01,4
+Angelishere,1045938,Dangerous Animals,0.01,5
+Angelishere,787126,Freaky Tales,0.01,6
+Angelishere,633799,The Running Man,0.01,7
+Angelishere,634944,The Bluff,0.01,8
+Angelishere,1050424,Shelter,0.01,9
+Angelishere,553090,Rust,0.01,10
+Anonymousse,1081550,"Sorry, Baby",0.91,1
+Anonymousse,972436,Rental Family,0.79,2
+Anonymousse,1093997,Splitsville,0.67,3
+Anonymousse,1008533,Twinless,0.65,4
+Anonymousse,673313,Sacramento,0.63,5
+Anonymousse,792648,HIM,0.59,6
+Anonymousse,1020977,Eternity,0.57,7
+Anonymousse,1002828,Friendship,0.55,8
+Anonymousse,1103676,The Mastermind,0.54,9
+Anonymousse,1095828,"Oh, Hi!",0.51,10
+Antonio Alaminos-Fernández,564,The Mummy,0.13,1
+Antonio Alaminos-Fernández,640,Catch Me If You Can,0.13,2
+Antonio Alaminos-Fernández,284054,Black Panther,0.13,3
+Antonio Alaminos-Fernández,679,Aliens,0.12,4
+Antonio Alaminos-Fernández,127585,X-Men: Days of Future Past,0.12,5
+Antonio Alaminos-Fernández,447332,A Quiet Place,0.11,6
+Antonio Alaminos-Fernández,353486,Jumanji: Welcome to the Jungle,0.11,7
+Antonio Alaminos-Fernández,70,Million Dollar Baby,0.1,8
+Antonio Alaminos-Fernández,954,Mission: Impossible,0.1,9
+Antonio Alaminos-Fernández,927,Gremlins,0.1,10
+Antonio Ba,646497,Wake Up Dead Man: A Knives Out Mystery,0.75,1
+Antonio Ba,585381,The Thursday Murder Club,0.66,2
+Antonio Ba,1145888,The Perfect Neighbor,0.65,3
+Antonio Ba,1000306,The Lost Bus,0.58,4
+Antonio Ba,1251092,All the Empty Rooms,0.56,5
+Antonio Ba,1163238,Armed Only with a Camera: The Life and Death of Brent Renaud,0.55,6
+Antonio Ba,1193274,Titanic: The Digital Resurrection,0.5,7
+Antonio Ba,1033235,Jane Austen's Period Drama,0.48,8
+Antonio Ba,1004891,Warfare,0.48,9
+Antonio Ba,853702,Superman,0.48,10
+Appfel,361743,Top Gun: Maverick,0.2,1
+Appfel,670292,The Creator,0.16,2
+Appfel,800158,The Killer,0.16,3
+Appfel,985939,Fall,0.16,4
+Appfel,467244,The Zone of Interest,0.16,5
+Appfel,76600,Avatar: The Way of Water,0.16,6
+Appfel,766507,Prey,0.15,7
+Appfel,1196573,She Rides Shotgun,0.14,8
+Appfel,436270,Black Adam,0.14,9
+Appfel,1198984,We Bury the Dead,0.13,10
+AquaTofana,1029272,The Roses,0.43,1
+AquaTofana,1005440,A Big Bold Beautiful Journey,0.35,2
+AquaTofana,1270365,The Muppet Show,0.34,3
+AquaTofana,970909,Ella McCay,0.34,4
+AquaTofana,1080541,The Wrong Paris,0.33,5
+AquaTofana,1226951,To Get Her,0.31,6
+AquaTofana,1079176,Sketch,0.3,7
+AquaTofana,926796,Nonnas,0.29,8
+AquaTofana,701249,Peaky Blinders: The Immortal Man,0.28,9
+AquaTofana,1197358,My Mom Jayne,0.26,10
+Aqueronte72,414906,The Batman,0.48,1
+Aqueronte72,438631,Dune,0.28,2
+Aqueronte72,634649,Spider-Man: No Way Home,0.24,3
+Aqueronte72,882598,Smile,0.23,4
+Aqueronte72,75612,Oblivion,0.23,5
+Aqueronte72,800939,Ticket to Paradise,0.23,6
+Aqueronte72,453395,Doctor Strange in the Multiverse of Madness,0.22,7
+Aqueronte72,661374,Glass Onion: A Knives Out Mystery,0.21,8
+Aqueronte72,4348,Pride & Prejudice,0.2,9
+Aqueronte72,150540,Inside Out,0.2,10
+Aratea,1270365,The Muppet Show,0.37,1
+Aratea,1057839,GOAT,0.3,2
+Aratea,763995,A Minecraft Movie,0.2,3
+Aratea,1085761,Hoppers,0.2,4
+Aratea,885672,28 Years Later,0.18,5
+Aratea,792299,Thunderbolts*,0.16,6
+Aratea,948183,The Bad Guys 2,0.15,7
+Aratea,810123,Nobody 2,0.15,8
+Aratea,897095,Good Fortune,0.13,9
+Aratea,796977,The SpongeBob Movie: Search for SquarePants,0.13,10
