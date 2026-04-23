@@ -1,0 +1,6 @@
+{
+    "rmse": 0.18407711969741425,
+    "n_factors": 50,
+    "train_time_seconds": 0.3534,
+    "evaluation_method": "TruncatedSVD (Matrix Factorization)"
+}

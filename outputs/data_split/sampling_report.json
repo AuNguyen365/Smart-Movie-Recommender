@@ -1,0 +1,30 @@
+{
+    "metadata": {
+        "seed": 42,
+        "split_strategy": "GroupShuffleSplit (User-based)",
+        "target_ratios": {
+            "train": 0.7,
+            "val": 0.15,
+            "test": 0.15
+        }
+    },
+    "stats": {
+        "total_samples": 10411,
+        "total_users": 3506,
+        "train": {
+            "samples": 6862,
+            "users": 2454,
+            "ratio": 0.6591105561425415
+        },
+        "val": {
+            "samples": 1557,
+            "users": 526,
+            "ratio": 0.14955335702622227
+        },
+        "test": {
+            "samples": 1992,
+            "users": 526,
+            "ratio": 0.19133608683123618
+        }
+    }
+}
