@@ -39,13 +39,13 @@ def main():
     print("-> Finding frequent itemsets...")
     frequent_itemsets = fpgrowth(basket_sets, min_support=0.003, use_colnames=True)
     
-    # 4. Khai phá luật (Theo slide yêu cầu đầy đủ các chỉ số)
+    # 4. Khai phá luật 
     print("-> Mining association rules...")
     rules = association_rules(frequent_itemsets, metric="lift", min_threshold=1.0)
     
     # Tính toán thêm metrics nếu cần (mlxtend đã có sẵn support, confidence, lift, leverage, conviction)
     
-    # 5. Lưu Artifacts (Định dạng Parquet theo slide)
+    # 5. Lưu Artifacts 
     # Xử lý antecedents/consequents sang string để lưu parquet được
     rules_save = rules.copy()
     rules_save['antecedents'] = rules_save['antecedents'].apply(lambda x: list(x))
