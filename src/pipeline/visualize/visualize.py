@@ -1,10 +1,9 @@
 from pathlib import Path
 import pandas as pd
-import matplotlib.pyplot as plt
-import numpy as np
+import json
 
 # =====================================
-# PATH SETUP
+# PATH
 # =====================================
 BASE_DIR = Path(__file__).resolve().parents[3]
 
@@ -12,152 +11,143 @@ RULE_DIR = BASE_DIR / "outputs" / "association"
 CLUSTER_DIR = BASE_DIR / "outputs" / "clustering"
 REC_DIR = BASE_DIR / "outputs" / "recommendation"
 
-# save charts
-CHART_DIR = BASE_DIR / "outputs" / "figures"
-CHART_DIR.mkdir(parents=True, exist_ok=True)
+TOP_N = 10
 
 # =====================================
-# LOAD FILES
+# LOAD DATA
 # =====================================
 rules = pd.read_csv(RULE_DIR / "rules.csv")
-users_clustered = pd.read_parquet(CLUSTER_DIR / "labels.parquet")
-cluster_profiles = pd.read_csv(CLUSTER_DIR / "user_cluster_profiles.csv")
+users = pd.read_parquet(CLUSTER_DIR / "labels.parquet")
+profiles = pd.read_csv(CLUSTER_DIR / "user_cluster_profiles.csv")
 recommendations = pd.read_csv(REC_DIR / "recommendations.csv")
 
 # =====================================
-# STYLE
+# LOAD MOVIE DICTIONARY
 # =====================================
-plt.style.use("ggplot")
-plt.rcParams["figure.figsize"] = (10, 6)
-plt.rcParams["font.size"] = 11
+movie_map = {}
+dict_file = RULE_DIR / "dictionary.json"
+
+if dict_file.exists():
+    with open(dict_file, "r", encoding="utf-8") as f:
+        movie_map = json.load(f)
 
 # =====================================
-# AUTO DETECT COLUMN
+# HELPERS
 # =====================================
-def find_cluster_column(df):
-    keywords = ["cluster", "label", "segment", "group"]
-
+def find_cluster_col(df):
     for col in df.columns:
-        if any(k in col.lower() for k in keywords):
+        if "cluster" in col.lower() or "label" in col.lower():
             return col
-
-    for col in df.columns:
-        if df[col].nunique() <= 10:
-            return col
-
     return df.columns[-1]
 
+def clean_text(text):
+    return str(text).replace("[", "").replace("]", "").replace("'", "")
 
-def find_movie_column(df):
-    keywords = ["movie", "title", "film", "name"]
-
-    for col in df.columns:
-        if any(k in col.lower() for k in keywords):
-            return col
-
-    return df.columns[0]
-
-
-cluster_col = find_cluster_column(users_clustered)
-profile_cluster_col = find_cluster_column(cluster_profiles)
-movie_col = find_movie_column(recommendations)
-
-print("Detected users cluster column:", cluster_col)
-print("Detected profile cluster column:", profile_cluster_col)
-print("Detected recommendation movie column:", movie_col)
+cluster_col = find_cluster_col(users)
 
 # =====================================
-# SAVE FUNCTION
+# HEADER
 # =====================================
-def save_chart(filename):
-    plt.tight_layout()
-    plt.savefig(CHART_DIR / filename, dpi=300, bbox_inches="tight")
-    plt.close()
+print("=" * 60)
+print("SMART MOVIE RECOMMENDER REPORT".center(60))
+print("=" * 60)
 
 # =====================================
-# 1. USERS PER CLUSTER
+# OVERVIEW
 # =====================================
-plt.figure()
-users_clustered[cluster_col].value_counts().sort_index().plot(kind="bar")
-plt.title("Number of Users in Each Cluster")
-plt.xlabel("Cluster")
-plt.ylabel("Users")
-save_chart("01_users_per_cluster.png")
-
-# =====================================
-# 2. TOP 10 RULES BY LIFT
-# =====================================
-if "lift" in rules.columns:
-    top_rules = rules.sort_values("lift", ascending=False).head(10)
-
-    label_col = "antecedents_str"
-    if label_col not in rules.columns:
-        label_col = rules.columns[0]
-
-    plt.figure(figsize=(11, 6))
-    plt.barh(top_rules[label_col].astype(str), top_rules["lift"])
-    plt.title("Top 10 Association Rules by Lift")
-    plt.xlabel("Lift")
-    plt.gca().invert_yaxis()
-    save_chart("02_top_rules_lift.png")
+print("\n[OVERVIEW]")
+print("Users:", len(users))
+print("Rules:", len(rules))
+print("Clusters:", users[cluster_col].nunique())
+print("Recommendations:", len(recommendations))
 
 # =====================================
-# 3. SUPPORT VS CONFIDENCE
+# ASSOCIATION RULES
 # =====================================
-if "support" in rules.columns and "confidence" in rules.columns:
-    plt.figure()
-    plt.scatter(rules["support"], rules["confidence"], alpha=0.7)
-    plt.title("Support vs Confidence")
-    plt.xlabel("Support")
-    plt.ylabel("Confidence")
-    save_chart("03_support_confidence.png")
+print("\n[ASSOCIATION RULES - TOP 10]")
 
-# =====================================
-# 4. TOP RECOMMENDED MOVIES
-# =====================================
-movie_counts = recommendations[movie_col].astype(str).value_counts().head(10)
+# Sort tốt hơn (không đổi data, chỉ đổi cách nhìn)
+rules_sorted = rules.sort_values(
+    ["lift", "confidence", "support"],
+    ascending=False
+)
 
-plt.figure(figsize=(11, 6))
-movie_counts.plot(kind="bar")
-plt.title("Top 10 Most Recommended Movies")
-plt.xlabel("Movie")
-plt.ylabel("Count")
-plt.xticks(rotation=45, ha="right")
-save_chart("04_top_recommended_movies.png")
+top_rules = rules_sorted.head(TOP_N)
 
-# =====================================
-# 5. CLUSTER PROFILE HEATMAP
-# =====================================
-profile_data = cluster_profiles.copy()
+for i, (_, row) in enumerate(top_rules.iterrows(), 1):
+    ant = clean_text(row["antecedents_str"])
+    con = clean_text(row["consequents_str"])
+    print(f"{i}. {ant} -> {con}")
 
-if profile_cluster_col in profile_data.columns:
-    profile_data = profile_data.set_index(profile_cluster_col)
-
-numeric_data = profile_data.select_dtypes(include=[np.number])
-
-if not numeric_data.empty:
-    plt.figure(figsize=(12, 6))
-    plt.imshow(numeric_data, aspect="auto")
-    plt.colorbar()
-    plt.title("Cluster Profile Heatmap")
-    plt.yticks(range(len(numeric_data.index)), numeric_data.index)
-    plt.xticks(
-        range(len(numeric_data.columns)),
-        numeric_data.columns,
-        rotation=90
-    )
-    save_chart("05_cluster_heatmap.png")
+print("\n[ASSOCIATION DETAIL]")
+print(top_rules[[
+    "antecedents_str",
+    "consequents_str",
+    "support",
+    "confidence",
+    "lift"
+]])
 
 # =====================================
-# 6. DISTRIBUTION OF LIFT
+# CLUSTERING
 # =====================================
-if "lift" in rules.columns:
-    plt.figure()
-    rules["lift"].hist(bins=20)
-    plt.title("Distribution of Lift Values")
-    plt.xlabel("Lift")
-    plt.ylabel("Frequency")
-    save_chart("06_lift_distribution.png")
+print("\n[CLUSTER DISTRIBUTION]")
 
-print("\nAll charts saved successfully!")
-print("Folder:", CHART_DIR)
+cluster_counts = users[cluster_col].value_counts().sort_index()
+for cluster, count in cluster_counts.items():
+    print(f"Cluster {cluster}: {count} users")
+
+print("\n[CLUSTER INSIGHT]")
+for _, row in profiles.head(TOP_N).iterrows():
+    cid = row["cluster_id"]
+    g1 = row["top_genre_1"]
+    g2 = row["top_genre_2"]
+    print(f"Cluster {cid}: prefers {g1} / {g2}")
+
+print("\n[CLUSTER SAMPLE USERS]")
+sample_cluster = users[cluster_col].iloc[0]
+print(users[users[cluster_col] == sample_cluster].head())
+
+# =====================================
+# RECOMMENDATION
+# =====================================
+print("\n[RECOMMENDATION OVERVIEW]")
+print("Total users (in recommendation):", recommendations["user_id"].nunique())
+print("Total movies:", recommendations["movie_id"].nunique())
+
+# TOP MOVIES
+print("\n[TOP MOVIES FROM RECOMMENDATION]")
+
+movies = recommendations["movie_title"].astype(str)
+
+if movie_map:
+    movies = movies.map(lambda x: movie_map.get(str(x), x))
+
+top_movies = movies.value_counts().head(TOP_N)
+
+for i, (movie, count) in enumerate(top_movies.items(), 1):
+    print(f"{i}. {movie} ({count})")
+
+# SAMPLE USER
+print("\n[SAMPLE RECOMMENDATION PER USER]")
+
+sample_user = recommendations["user_id"].iloc[0]
+user_rec = recommendations[recommendations["user_id"] == sample_user]
+
+print(f"User: {sample_user}")
+print(user_rec.sort_values("rank"))
+
+# GLOBAL TOP SCORE
+print("\n[TOP SCORE GLOBAL]")
+print(recommendations.sort_values(by="score", ascending=False).head(10))
+
+# SCORE STATS
+print("\n[SCORE STATISTICS]")
+print(recommendations["score"].describe())
+
+# =====================================
+# FOOTER
+# =====================================
+print("\n" + "=" * 60)
+print("END OF REPORT".center(60))
+print("=" * 60)
