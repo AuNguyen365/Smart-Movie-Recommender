@@ -11,7 +11,7 @@ from sklearn.decomposition import PCA
 import sys
 import io
 
-# Fix encoding for Windows console
+
 if sys.stdout.encoding != 'utf-8':
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
