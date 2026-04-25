@@ -2,7 +2,12 @@ import pandas as pd
 from pathlib import Path
 from src.pipeline.visualize.association import plot_rules_scatter, plot_top_rules_by_lift
 from src.pipeline.visualize.recommendation import plot_score_distribution, plot_popular_recommendations, plot_rank_vs_score
-from src.pipeline.visualize.preprocessing import plot_genre_distribution, plot_numerical_features, plot_encoding_correlation
+from src.pipeline.visualize.preprocessing import (
+    plot_genre_count_distribution, 
+    plot_rating_distribution, 
+    plot_source_distribution, 
+    plot_genre_after_preprocessing
+)
 
 def main():
     # Paths
@@ -17,12 +22,18 @@ def main():
         print(f"Loading encoded data from {encoding_path}...")
         df = pd.read_csv(encoding_path)
         pre_dir = FIGURES_DIR / "preprocessing"
+        
+        # Xóa các file cũ trong thư mục preprocessing nếu có
+        if pre_dir.exists():
+            for f in pre_dir.glob("*.png"):
+                f.unlink()
         pre_dir.mkdir(parents=True, exist_ok=True)
         
-        plot_genre_distribution(df, pre_dir)
-        plot_numerical_features(df, pre_dir)
-        plot_encoding_correlation(df, pre_dir)
-        print(f"Preprocessing (Encoding) visualizations saved to {pre_dir}")
+        plot_genre_count_distribution(df, pre_dir)
+        plot_rating_distribution(df, pre_dir)
+        plot_source_distribution(df, pre_dir)
+        plot_genre_after_preprocessing(df, pre_dir)
+        print(f"Preprocessing visualizations saved to {pre_dir}")
     else:
         print("Encoded data file (train.csv) not found. Skipping preprocessing visualization.")
 
