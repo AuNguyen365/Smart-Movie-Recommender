@@ -1,0 +1,401 @@
+{
+  "num_users": 2454,
+  "num_features": 29,
+  "k_analysis": {
+    "k_values": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "inertias": [
+      62723.543035364964,
+      58683.265051425115,
+      55372.764724007706,
+      53149.75462902249,
+      50601.579821578685,
+      48017.218051501615,
+      46016.58115657204,
+      43226.09299183474,
+      41376.54739097719
+    ],
+    "silhouette_scores": [
+      0.19404946984018762,
+      0.12833574296903025,
+      0.11794703028923874,
+      0.1500471978045977,
+      0.11033386964008855,
+      0.14851098835498877,
+      0.14923054741655048,
+      0.14302406641042742,
+      0.19832163958469645
+    ],
+    "davies_bouldin_scores": [
+      2.64883375029861,
+      2.5021217033315035,
+      2.4116385572506847,
+      1.9376373200811987,
+      1.9984449842271401,
+      1.9902867787416507,
+      1.8843735137085715,
+      1.5953430348520345,
+      1.6546582688449696
+    ],
+    "calinski_harabasz_scores": [
+      234.1018342826417,
+      209.43673326798154,
+      196.7353792445514,
+      179.26676792555114,
+      175.2289503730841,
+      175.77073906301908,
+      172.33848289269307,
+      180.19510416640793,
+      179.40341782177003
+    ],
+    "best_k": 10,
+    "best_silhouette": 0.19832163958469645
+  },
+  "cluster_distribution": {
+    "cluster_0": 298,
+    "cluster_1": 198,
+    "cluster_2": 273,
+    "cluster_3": 255,
+    "cluster_4": 520,
+    "cluster_5": 501,
+    "cluster_6": 168,
+    "cluster_7": 168,
+    "cluster_8": 22,
+    "cluster_9": 51
+  },
+  "cluster_percentages": {
+    "cluster_0": 12.143439282803586,
+    "cluster_1": 8.06845965770171,
+    "cluster_2": 11.124694376528117,
+    "cluster_3": 10.39119804400978,
+    "cluster_4": 21.189894050529748,
+    "cluster_5": 20.415647921760392,
+    "cluster_6": 6.845965770171149,
+    "cluster_7": 6.845965770171149,
+    "cluster_8": 0.8964955175224123,
+    "cluster_9": 2.078239608801956
+  },
+  "silhouette_score": 0.19832163958469645,
+  "davies_bouldin_score": 1.6546582688449696,
+  "calinski_harabasz_score": 179.40341782177003,
+  "quality": "Yếu",
+  "pca": {
+    "n_components": 2,
+    "explained_variance_ratio": [
+      0.130616712975539,
+      0.07968724693911312
+    ],
+    "total_explained_variance": 0.21030395991465212
+  },
+  "cluster_profiles": [
+    {
+      "cluster_id": 0,
+      "num_users": 298,
+      "percentage": 12.143439282803586,
+      "avg_rating": 0.5997825006214268,
+      "avg_num_ratings": 1.2684563758389262,
+      "avg_rating_std": 0.08988584366159255,
+      "top_genres": [
+        {
+          "genre": "count",
+          "preference_score": 3.0111577181208053
+        },
+        {
+          "genre": "action",
+          "preference_score": 0.8379753914988816
+        },
+        {
+          "genre": "science_fiction",
+          "preference_score": 0.7374440715883669
+        },
+        {
+          "genre": "adventure",
+          "preference_score": 0.7183165548098435
+        },
+        {
+          "genre": "count_scaled",
+          "preference_score": 0.3351929530201342
+        }
+      ]
+    },
+    {
+      "cluster_id": 1,
+      "num_users": 198,
+      "percentage": 8.06845965770171,
+      "avg_rating": 0.48199588477366256,
+      "avg_num_ratings": 1.0606060606060606,
+      "avg_rating_std": 0.1051115991289507,
+      "top_genres": [
+        {
+          "genre": "count",
+          "preference_score": 1.303030303030303
+        },
+        {
+          "genre": "documentary",
+          "preference_score": 0.9877946127946127
+        },
+        {
+          "genre": "music",
+          "preference_score": 0.11447811447811447
+        },
+        {
+          "genre": "crime",
+          "preference_score": 0.08080808080808081
+        },
+        {
+          "genre": "drama",
+          "preference_score": 0.055134680134680134
+        }
+      ]
+    },
+    {
+      "cluster_id": 2,
+      "num_users": 273,
+      "percentage": 11.124694376528117,
+      "avg_rating": 0.5820614508018521,
+      "avg_num_ratings": 15.27838827838828,
+      "avg_rating_std": 0.24362232272843456,
+      "top_genres": [
+        {
+          "genre": "count",
+          "preference_score": 2.4950080702776933
+        },
+        {
+          "genre": "thriller",
+          "preference_score": 0.3400115664573085
+        },
+        {
+          "genre": "action",
+          "preference_score": 0.2984622062682271
+        },
+        {
+          "genre": "drama",
+          "preference_score": 0.2878036652356193
+        },
+        {
+          "genre": "comedy",
+          "preference_score": 0.2569265664798332
+        }
+      ]
+    },
+    {
+      "cluster_id": 3,
+      "num_users": 255,
+      "percentage": 10.39119804400978,
+      "avg_rating": 0.5789034132171387,
+      "avg_num_ratings": 1.1490196078431372,
+      "avg_rating_std": 0.05302165718531452,
+      "top_genres": [
+        {
+          "genre": "count",
+          "preference_score": 2.907843137254902
+        },
+        {
+          "genre": "crime",
+          "preference_score": 0.9526143790849674
+        },
+        {
+          "genre": "thriller",
+          "preference_score": 0.5450980392156862
+        },
+        {
+          "genre": "action",
+          "preference_score": 0.3415032679738562
+        },
+        {
+          "genre": "count_scaled",
+          "preference_score": 0.3179738562091503
+        }
+      ]
+    },
+    {
+      "cluster_id": 4,
+      "num_users": 520,
+      "percentage": 21.189894050529748,
+      "avg_rating": 0.4845311016144349,
+      "avg_num_ratings": 1.198076923076923,
+      "avg_rating_std": 0.07513779460670572,
+      "top_genres": [
+        {
+          "genre": "count",
+          "preference_score": 1.8097008547008548
+        },
+        {
+          "genre": "drama",
+          "preference_score": 0.5492307692307693
+        },
+        {
+          "genre": "comedy",
+          "preference_score": 0.399732905982906
+        },
+        {
+          "genre": "thriller",
+          "preference_score": 0.32471153846153844
+        },
+        {
+          "genre": "action",
+          "preference_score": 0.2698290598290598
+        }
+      ]
+    },
+    {
+      "cluster_id": 5,
+      "num_users": 501,
+      "percentage": 20.415647921760392,
+      "avg_rating": 0.459594804675232,
+      "avg_num_ratings": 1.2974051896207586,
+      "avg_rating_std": 0.09026621363133475,
+      "top_genres": [
+        {
+          "genre": "count",
+          "preference_score": 2.13480056693336
+        },
+        {
+          "genre": "horror",
+          "preference_score": 0.869512585473311
+        },
+        {
+          "genre": "thriller",
+          "preference_score": 0.5268073669315303
+        },
+        {
+          "genre": "mystery",
+          "preference_score": 0.29042907309902727
+        },
+        {
+          "genre": "count_scaled",
+          "preference_score": 0.18913342782222664
+        }
+      ]
+    },
+    {
+      "cluster_id": 6,
+      "num_users": 168,
+      "percentage": 6.845965770171149,
+      "avg_rating": 0.616200291845133,
+      "avg_num_ratings": 1.4226190476190477,
+      "avg_rating_std": 0.12822628542505254,
+      "top_genres": [
+        {
+          "genre": "count",
+          "preference_score": 3.8609079743008317
+        },
+        {
+          "genre": "family",
+          "preference_score": 0.7986866969009826
+        },
+        {
+          "genre": "comedy",
+          "preference_score": 0.6431004346182918
+        },
+        {
+          "genre": "animation",
+          "preference_score": 0.5387825963718821
+        },
+        {
+          "genre": "fantasy",
+          "preference_score": 0.5283281368102797
+        }
+      ]
+    },
+    {
+      "cluster_id": 7,
+      "num_users": 168,
+      "percentage": 6.845965770171149,
+      "avg_rating": 0.5151234567901234,
+      "avg_num_ratings": 1.3035714285714286,
+      "avg_rating_std": 0.11373916521083596,
+      "top_genres": [
+        {
+          "genre": "count",
+          "preference_score": 2.5246456916099773
+        },
+        {
+          "genre": "romance",
+          "preference_score": 0.9618055555555556
+        },
+        {
+          "genre": "comedy",
+          "preference_score": 0.5818310657596373
+        },
+        {
+          "genre": "drama",
+          "preference_score": 0.546045918367347
+        },
+        {
+          "genre": "count_scaled",
+          "preference_score": 0.2541076152683295
+        }
+      ]
+    },
+    {
+      "cluster_id": 8,
+      "num_users": 22,
+      "percentage": 0.8964955175224123,
+      "avg_rating": 0.49747474747474746,
+      "avg_num_ratings": 1.0909090909090908,
+      "avg_rating_std": 0.039283710065919325,
+      "top_genres": [
+        {
+          "genre": "count",
+          "preference_score": 4.0
+        },
+        {
+          "genre": "action",
+          "preference_score": 1.0
+        },
+        {
+          "genre": "science_fiction",
+          "preference_score": 1.0
+        },
+        {
+          "genre": "superhero",
+          "preference_score": 0.9772727272727273
+        },
+        {
+          "genre": "adventure",
+          "preference_score": 0.7954545454545454
+        }
+      ]
+    },
+    {
+      "cluster_id": 9,
+      "num_users": 51,
+      "percentage": 2.078239608801956,
+      "avg_rating": 0.5577342047930283,
+      "avg_num_ratings": 1.0784313725490196,
+      "avg_rating_std": 0.11785113019775792,
+      "top_genres": [
+        {
+          "genre": "count",
+          "preference_score": 2.735294117647059
+        },
+        {
+          "genre": "history",
+          "preference_score": 0.9607843137254902
+        },
+        {
+          "genre": "drama",
+          "preference_score": 0.7745098039215687
+        },
+        {
+          "genre": "count_scaled",
+          "preference_score": 0.2892156862745097
+        },
+        {
+          "genre": "war",
+          "preference_score": 0.23529411764705882
+        }
+      ]
+    }
+  ]
+}

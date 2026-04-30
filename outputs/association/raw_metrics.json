@@ -1,6 +1,8 @@
 {
-    "mining_time_seconds": 0.7379,
+    "mining_time_seconds": 4.4357,
     "num_rules": 9134,
     "num_itemsets": 893,
-    "avg_lift": 228.44607641029728
+    "avg_lift": 228.44607641029728,
+    "avg_confidence": 0.8834589938076909,
+    "avg_support": 0.003400976147255557
 }

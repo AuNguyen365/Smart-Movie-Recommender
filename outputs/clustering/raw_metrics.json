@@ -1,7 +1,0 @@
-{
-    "silhouette_score": 0.14848742690775368,
-    "calinski_harabasz_score": 691.9033684150991,
-    "davies_bouldin_score": 2.5459689337938944,
-    "fit_time_seconds": 3.2895,
-    "k_clusters": 2
-}
