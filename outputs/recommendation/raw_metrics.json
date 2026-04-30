@@ -1,6 +1,11 @@
 {
-    "rmse": 0.1987654321,
+    "rmse": 4.263346445256204,
+    "mae": 2.9788079343063303,
     "n_factors": 50,
-    "train_time_seconds": 0.2324,
-    "evaluation_method": "TruncatedSVD (Matrix Factorization)"
+    "train_time_seconds": 3.923,
+    "evaluation_method": "TruncatedSVD (Matrix Factorization)",
+    "explained_variance": 0.5082675136579459,
+    "num_users": 2454,
+    "num_movies": 2305,
+    "sparsity": 0.9987868759137766
 }
