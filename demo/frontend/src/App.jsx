@@ -16,15 +16,18 @@ function App() {
   
   const [searchQuery, setSearchQuery] = useState('')
   const [searchRecs, setSearchRecs] = useState([])
+  const [searchedMovie, setSearchedMovie] = useState(null)
   const [isSearching, setIsSearching] = useState(false)
 
   const handleSearch = async (e) => {
     e.preventDefault();
     if (!searchQuery.trim()) return;
     setIsSearching(true);
+    setSearchedMovie(null);
     try {
       const res = await axios.get(`http://localhost:8000/api/movie_recommendations?movie=${encodeURIComponent(searchQuery)}`)
       setSearchRecs(res.data.recommendations)
+      setSearchedMovie(res.data.searched_movie)
     } catch (err) {
       console.error("Error searching movies:", err)
     } finally {
@@ -226,32 +229,54 @@ function App() {
               </form>
 
               <div className="movie-list">
+                {searchedMovie && (
+                  <div className="movie-item searched-result" style={{ border: '1px solid var(--accent-1)', background: 'rgba(59, 130, 246, 0.1)', marginBottom: '2rem' }}>
+                    <div className="movie-rank top-3" style={{ fontSize: '0.8rem' }}>Result</div>
+                    <div className="movie-details">
+                      <div className="movie-title" style={{ color: 'var(--accent-1)', fontSize: '1.25rem' }}>{searchedMovie}</div>
+                      <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>Phim bạn vừa tìm kiếm</div>
+                    </div>
+                  </div>
+                )}
+
                 {searchRecs.length > 0 ? (
-                  searchRecs.map((rec, index) => (
-                    <div key={index} className="movie-item">
-                      <div className={`movie-rank ${index < 3 ? 'top-3' : ''}`}>
-                        {index + 1}
-                      </div>
-                      <div className="movie-details">
-                        <div className="movie-title">{rec.movie_title}</div>
-                        <div className="movie-score" style={{ display: 'flex', gap: '1rem', background: 'transparent', padding: 0 }}>
-                          <span style={{ fontSize: '0.75rem', color: '#6ee7b7', background: 'rgba(16, 185, 129, 0.15)', padding: '0.125rem 0.5rem', borderRadius: '1rem' }}>
-                            <Zap size={12} style={{ display: 'inline', marginRight: '4px', verticalAlign: '-1px' }} />
-                            Lift: {rec.lift.toFixed(2)}x
-                          </span>
-                          <span style={{ fontSize: '0.75rem', color: '#93c5fd', background: 'rgba(59, 130, 246, 0.15)', padding: '0.125rem 0.5rem', borderRadius: '1rem' }}>
-                            <Activity size={12} style={{ display: 'inline', marginRight: '4px', verticalAlign: '-1px' }} />
-                            Confidence: {(rec.confidence * 100).toFixed(1)}%
-                          </span>
+                  <>
+                    <h3 className="section-title" style={{ marginBottom: '1rem', opacity: 0.8 }}><Zap size={18} /> Phim gợi ý cho bạn</h3>
+                    {searchRecs.map((rec, index) => (
+                      <div key={index} className="movie-item">
+                        <div className={`movie-rank ${index < 3 ? 'top-3' : ''}`}>
+                          {index + 1}
+                        </div>
+                        <div className="movie-details">
+                          <div className="movie-title">{rec.movie_title}</div>
+                          <div className="movie-score" style={{ display: 'flex', gap: '1rem', background: 'transparent', padding: 0 }}>
+                            <span style={{ fontSize: '0.75rem', color: '#6ee7b7', background: 'rgba(16, 185, 129, 0.15)', padding: '0.125rem 0.5rem', borderRadius: '1rem' }}>
+                              <Zap size={12} style={{ display: 'inline', marginRight: '4px', verticalAlign: '-1px' }} />
+                              Lift: {rec.lift.toFixed(2)}x
+                            </span>
+                            <span style={{ fontSize: '0.75rem', color: '#93c5fd', background: 'rgba(59, 130, 246, 0.15)', padding: '0.125rem 0.5rem', borderRadius: '1rem' }}>
+                              <Activity size={12} style={{ display: 'inline', marginRight: '4px', verticalAlign: '-1px' }} />
+                              Confidence: {(rec.confidence * 100).toFixed(1)}%
+                            </span>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))
+                    ))}
+                  </>
                 ) : (
+                  !isSearching && searchQuery && (
+                    <div className="empty-state">
+                      <Film size={48} />
+                      <h3>No related movies found</h3>
+                      <p>We couldn't find any associations for this movie yet.</p>
+                    </div>
+                  )
+                )}
+                {!searchQuery && (
                   <div className="empty-state">
                     <Film size={48} />
-                    <h3>No results found</h3>
-                    <p>Enter a movie name above to find associated movies.</p>
+                    <h3>Enter a movie name</h3>
+                    <p>Find what movies are often watched together with your favorites.</p>
                   </div>
                 )}
               </div>
