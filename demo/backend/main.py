@@ -151,45 +151,49 @@ def get_rules():
 @app.get("/api/movie_recommendations")
 def movie_recommendations(movie: str):
     if full_rules_df.empty or not movie:
-        return {"recommendations": []}
+        return {"recommendations": [], "searched_movie": None}
     
-    def is_match(antecedents_str, query):
+    matched_movie = None
+    best_ratio = 0
+    
+    def get_match(antecedents_str, query):
+        nonlocal matched_movie, best_ratio
         q_lower = query.lower()
-        # Fast exact substring
-        if q_lower in str(antecedents_str).lower():
-            return True
-            
-        norm_query = re.sub(r'[^a-zA-Z0-9]', '', q_lower)
-        q_words = re.findall(r'\w+', q_lower)
         
         try:
             movies = ast.literal_eval(antecedents_str)
         except:
             movies = [antecedents_str]
             
+        found = False
         for m in movies:
             m_lower = str(m).lower()
-            norm_m = re.sub(r'[^a-zA-Z0-9]', '', m_lower)
             
-            # Normalized substring (e.g. "ironman" in "ironman3")
-            if norm_query and norm_query in norm_m:
+            # 1. Exact match
+            if q_lower == m_lower:
+                matched_movie = m
+                best_ratio = 2.0 # Perfect match
                 return True
                 
-            # Token match (e.g. "wick john" in "john wick")
-            if q_words and all(w in m_lower for w in q_words):
-                return True
+            # 2. Substring match
+            if q_lower in m_lower:
+                if best_ratio < 1.5:
+                    matched_movie = m
+                    best_ratio = 1.5
+                found = True
                 
-            # Fuzzy match for slight typos (e.g. "jhon wick")
-            if norm_query and len(norm_query) >= 4:
-                if SequenceMatcher(None, norm_query, norm_m).ratio() > 0.75:
-                    return True
-                    
-        return False
+            # 3. Fuzzy match
+            ratio = SequenceMatcher(None, q_lower, m_lower).ratio()
+            if ratio > 0.7 and ratio > best_ratio:
+                matched_movie = m
+                best_ratio = ratio
+                found = True
+                
+        return found
 
-    mask = full_rules_df['antecedents_str'].apply(lambda x: is_match(x, movie))
+    mask = full_rules_df['antecedents_str'].apply(lambda x: get_match(x, movie))
     filtered = full_rules_df[mask]
     
-    import ast
     recs = {}
     for _, row in filtered.iterrows():
         try:
@@ -197,22 +201,26 @@ def movie_recommendations(movie: str):
             if pd.isna(consequents_str):
                 continue
             
-            # consequents_str is like "['Movie']"
             consequents = ast.literal_eval(consequents_str)
             for m in consequents:
-                # Exclude the searched movie itself if it somehow appears in consequents
-                if movie.lower() not in m.lower():
-                    if m not in recs or row['lift'] > recs[m]['lift']:
-                        recs[m] = {
-                            "movie_title": m,
-                            "confidence": row['confidence'],
-                            "lift": row['lift']
-                        }
+                # Exclude the searched movie itself
+                if matched_movie and matched_movie.lower() == m.lower():
+                    continue
+                    
+                if m not in recs or row['lift'] > recs[m]['lift']:
+                    recs[m] = {
+                        "movie_title": m,
+                        "confidence": row['confidence'],
+                        "lift": row['lift']
+                    }
         except Exception:
             pass
             
     sorted_recs = sorted(list(recs.values()), key=lambda x: x['lift'], reverse=True)
-    return {"recommendations": sorted_recs[:20]}
+    return {
+        "searched_movie": matched_movie,
+        "recommendations": sorted_recs[:20]
+    }
 
 @app.get("/api/metrics")
 def get_metrics():
